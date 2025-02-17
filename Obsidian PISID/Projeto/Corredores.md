@@ -1,0 +1,5 @@
+- a passagem entre salas é feita através de corredores
+	- entradas e saídas de corredores / salas são detetadas por [[Sensores de Movimento|sensores de movimento]]
+- cada corredor une apenas duas salas
+	- há becos? [[Perguntas para a Próxima Reunião com o Docente]]
+	- há loops? seja de dar voltas gigante

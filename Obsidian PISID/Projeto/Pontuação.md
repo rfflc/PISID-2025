@@ -1,0 +1,5 @@
+- os jogadores começam o jogo com 0 pontos
+- ao pressionarem o [[Gatilho|gatilho]], os jogadores ganham ou perdem pontos caso acertem ou falhem a janela de tempo em que o número de [[Marsamis|odds e evens]] é igual numa determinada [[Salas|sala]]
+	- ganham um (1) ponto caso acertem
+	- perdem meio (1/2) ponto caso falhem
+	- confirmar esta informação [[Perguntas para a Próxima Reunião com o Docente]]

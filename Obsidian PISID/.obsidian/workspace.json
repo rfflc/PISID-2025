@@ -1,0 +1,242 @@
+{
+  "main": {
+    "id": "2124c25bdec5ba11",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ac2184637285cb1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3817f9134d898f6c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projeto/Corredores.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Corredores"
+            }
+          },
+          {
+            "id": "d34f2f558e0ff18d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Organização/Perguntas para a Próxima Reunião com o Docente.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Perguntas para a Próxima Reunião com o Docente"
+            }
+          },
+          {
+            "id": "b7261c32db8c071c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projeto/Regras do Jogo.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Regras do Jogo"
+            }
+          },
+          {
+            "id": "a83ef189b5083a03",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c21437bbb0e48745",
+    "type": "split",
+    "children": [
+      {
+        "id": "5a58270456da373d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2e73bc4ef77fe403",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c4048c7e3b74340e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "0d223048153a86cd",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "63dd2da71e8e0733",
+    "type": "split",
+    "children": [
+      {
+        "id": "8c2d78a0d34f7453",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "871003ec17d3e065",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Projeto/Corredores.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Corredores"
+            }
+          },
+          {
+            "id": "5fbf427499eb6b4c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Projeto/Corredores.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Corredores"
+            }
+          },
+          {
+            "id": "fa52c3025fcdb47b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "281851ecb0a98339",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Projeto/Corredores.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Corredores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "3817f9134d898f6c",
+  "lastOpenFiles": [
+    "Projeto/Ruído.md",
+    "Projeto/Portas.md",
+    "Projeto/Regras do Jogo.md",
+    "Organização/Perguntas para a Próxima Reunião com o Docente.md",
+    "Projeto/Pontuação.md",
+    "Atuadores.md",
+    "Organização/Lista de Tarefas.md",
+    "Projeto/Sensores de Ruído.md",
+    "Projeto/Sensores.md",
+    "Projeto/Servidor Remoto.md",
+    "Projeto/Sensores de Movimento.md",
+    "Projeto/Marsamis.md",
+    "Projeto/Corredores.md",
+    "Projeto/Salas.md",
+    "Projeto/Comandos MongoDB (Windows).md",
+    "Projeto/Comandos MongoDB (MacOS).md",
+    "Projeto/MongoDB.md",
+    "Projeto/A NÃO IMPLEMENTAR.md",
+    "Cadeira/PISID.md",
+    "Projeto/Marsami (espécie).md",
+    "Projeto/Arquitetura.md",
+    "Projeto/Python.md",
+    "Projeto/PHP.md",
+    "Projeto/Mapa do Labirinto.md",
+    "Projeto/Condições de Fim de Jogo.md",
+    "Grupo/Composição do Grupo 22.md",
+    "Cadeira",
+    "Grupo",
+    "Organização",
+    "Projeto"
+  ]
+}
