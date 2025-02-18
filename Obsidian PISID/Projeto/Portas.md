@@ -1,6 +1,13 @@
+ver:
+	[[Atuadores]]
+	[[Corredores]]
+	[[Jogadores]]
+	[[Marsamis]]
+	[[Salas]]
+
 - conectam as salas aos corredores (e vice versa)
 - no início de cada [[Largadas|largada / ronda]] as portas começam todas abertas
-- podem ser abertas e fechadas pelo [[Jogador|jogador]] no próprio [[Labirinto|labirinto]] através de [[Atuadores|atuadores]]
+- podem ser abertas e fechadas pelo [[Jogadores|jogador]] no próprio [[Labirinto|labirinto]] através de [[Atuadores|atuadores]]
 	- cada jogador controla apenas as portas no seu próprio labirinto
 	- o jogador tem quatro opções:
 		- abrir uma porta individual (porta específica à escolha)

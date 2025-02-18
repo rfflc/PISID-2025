@@ -1,9 +1,11 @@
 {
   "cssTheme": "Vanilla AMOLED",
   "theme": "obsidian",
-  "accentColor": "#d95959",
+  "accentColor": "#bbff00",
   "translucency": true,
   "enabledCssSnippets": [
     "custom-bullets"
-  ]
+  ],
+  "interfaceFontFamily": "Gotham",
+  "textFontFamily": "Gotham"
 }

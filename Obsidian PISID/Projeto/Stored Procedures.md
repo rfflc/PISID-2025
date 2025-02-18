@@ -1,0 +1,10 @@
+ver: 
+	[[A NÃO IMPLEMENTAR]]
+	[[Administrador da Base de Dados]]
+	[[Administrador de Jogos]]
+	[[Arquitetura]]
+	[[Formulários HTML]]
+	[[Jogadores]]
+	[[MySQL]]
+	[[PC2]]
+	[[Requisitos]]

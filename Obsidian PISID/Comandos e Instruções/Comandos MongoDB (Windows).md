@@ -1,3 +1,5 @@
+ver:
+	[[MongoDB]]
 
 Here are the MongoDB commands adapted for Windows:
 

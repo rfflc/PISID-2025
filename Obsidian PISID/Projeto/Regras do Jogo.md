@@ -1,4 +1,14 @@
-- o jogo envolve vários [[Jogador|jogadores]]
+ver: 
+	[[Arquitetura]]
+	[[Atuadores]]
+	[[Condições de Final de Jogo]]
+	[[Configuração do Labirinto]]
+	[[Jogadores]]
+	[[Labirinto]]
+	[[Marsamis]]
+	[[Requisitos]]
+
+- o jogo envolve vários [[Jogadores|jogadores]]
 - cada jogador tem um [[Labirinto|labirinto]] associado
 - os labirintos são estanques (?) [[Perguntas para a Próxima Reunião com o Docente]]
 - o jogo decorre por [[Largadas|largadas]] nas quais são libertados grupos de [[Marsamis|marsamis]] em cada labirinto

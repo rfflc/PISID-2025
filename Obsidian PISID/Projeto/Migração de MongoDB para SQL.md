@@ -1,8 +1,10 @@
 ver:
 	[[Arquitetura]]
+	[[Enunciado]]
 	[[Java?]]
 	[[Python]]
 	[[MQTT]]
+	[[MongoDB]]
 	[[MySQL]]
 	[[PC1]]
-	[[Servidor Remoto]]
+	[[PC2]]

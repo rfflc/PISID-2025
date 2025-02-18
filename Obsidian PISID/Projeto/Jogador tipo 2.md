@@ -1,1 +1,4 @@
-android
+ver:
+	[[Android]]
+	[[Jogadores]]
+	[[Telemóvel Android]]

@@ -1,3 +1,7 @@
+ver:
+	[[Condições de Final de Jogo]]
+	[[Sensores de Ruído]]
+
 - o nível de ruído é calculado artificialmente (simulado) pelo script de Python do [[Sensores de Ruído|sensor de ruído]] em função do número de [[Sensores de Movimento|movimentos detetados]] dentro do [[Labirinto|labirinto]]
 	- os movimentos também são simulados
 	- a função exata é desconhecida (ver código dado) ou [[Perguntas para a Próxima Reunião com o Docente]] mas é proporcional

@@ -1,3 +1,0 @@
-- abrem e fecham [[Portas|portas]]
-- são operados pelos [[Jogador|jogadores]] durante o jogo e pelos sistemas automáticos de deteção de [[Ruído|ruído]]
-- a posição das portas é a meio do corredor ou na ligação corredor-sala? [[Perguntas para a Próxima Reunião com o Docente]]

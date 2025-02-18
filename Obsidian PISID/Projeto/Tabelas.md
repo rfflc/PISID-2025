@@ -1,8 +1,5 @@
 ver:
-	[[Arquitetura]]
-	[[Enunciado]]
 	[[MySQL]]
-	[[PC2]]
 	[[Requisitos]]
 	[[Stored Procedures]]
-	[[Tabelas]]
+	[[Tabelas Recomendadas]]
