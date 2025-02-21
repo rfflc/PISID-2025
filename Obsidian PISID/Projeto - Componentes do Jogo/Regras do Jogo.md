@@ -1,0 +1,43 @@
+ver: 
+	[[Arquitetura]]
+	[[Atuadores]]
+	[[Condições de Final de Jogo]]
+	[[Configuração do Labirinto]]
+	[[Jogadores]]
+	[[Labirintos]]
+	[[Marsamis]]
+	[[Requisitos]]
+
+- o jogo envolve vários [[Jogadores|jogadores]]
+- cada jogador tem um [[Labirintos|labirinto]] associado
+- os labirintos são estanques (?) [[Perguntas para a Próxima Reunião com o Docente]]
+- o jogo decorre por [[Largadas|largadas]] nas quais são libertados grupos de [[Marsamis|marsamis]] em cada labirinto
+	- cada largada / ronda começa com todas as [[Portas|portas]] do labirinto abertas
+- quantas rondas / largadas é que há por jogo? [[Perguntas para a Próxima Reunião com o Docente]]
+- as [[Salas|salas]] nas quais os marsamis são inicialmente colocados variam de ronda para ronda? [[Perguntas para a Próxima Reunião com o Docente]]
+- as salas variam de labirinto / jogador para jogador? [[Perguntas para a Próxima Reunião com o Docente]]
+- os marsamis, no momento em que são colocados / soltos nos labirintos, correm até à exaustão, podendo trocar de sala até ao momento em que atingem a mencionada exaustão
+	- (os marsamis são simulados no mesmo script que simula os sensores de movimento)
+	- a troca de salas é feita dentro dos caminhos possíveis
+		- tendo em conta que os corredores que ligam as salas têm direções de circulação obrigatória e que as portas que os ligam podem ser fechadas pelos jogadores, é possível que um marsami seja impedido de mudar de sala
+			- isto é contemplado no sistema de [[Mensagens de Movimento|mensagens de movimento]]
+- há dois tipos de marsamis soltos durante cada largada:
+	- odds (odd)
+	- evens (even) 
+- cada jogador tem acesso a um [[Gatilho|gatilho]] que deve pressionar quando estima que o número de odds e evens numa determinada sala é exatamente igual
+	- (há um gatilho por sala ou um para todas as salas?) [[Perguntas para a Próxima Reunião com o Docente]]
+	- ao pressionar o gatilho, o jogador ganha [[Pontuação|um ponto caso a igualdade ainda se mantenha ou perde meio ponto caso se tenha alterado]]
+		- os jogadores iniciam os jogo com zero pontos cada
+			- é possível acumular uma pontuação negativa ? [[Perguntas para a Próxima Reunião com o Docente]]
+- em adição ao gatilho, cada jogador tem acesso a [[Atuadores|atuadores]] que abrem e fecham as portas entre os corredores e as salas
+	- cada jogador controla apenas as portas no seu próprio labirinto
+	- o jogador tem quatro opções:
+		- abrir uma porta individual (porta específica à escolha)
+		- fechar uma porta individual (porta específica à escolha)
+		- abrir todas as portas
+		- fechar todas as portas
+	- este controlo é suspendido quando a ronda termina ou o [[Ruído|limite de ruído]] é atingido
+		- o ruído é simulado (no script Python do [[Sensores de Ruído|sensor de ruído]] )
+		- no caso do limite de ruído ser ultrapassado as portas são automaticamente fechadas, efetivamente terminando / bloqueando a ronda para o jogador em causa
+		- mas e se for só o cenário de exaustão, também se fecham? [[Perguntas para a Próxima Reunião com o Docente]]
+- a ronda termina quando todos os marsamis atingem exaustão (ou quando todos os labirintos ultrapassam os [[Ruído|limites de ruído]]? - se o limite é atingido, ficam imobilizados até ao final do jogo ou são reativados ao fim de um cooldown? e se ficarem todos imobilizados, acaba a ronda mais cedo? e também é mencionado que termina o jogo e não a ronda?) [[Perguntas para a Próxima Reunião com o Docente]]

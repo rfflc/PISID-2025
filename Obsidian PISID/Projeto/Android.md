@@ -1,2 +1,0 @@
-ver:
-	[[Telemóvel Android]]

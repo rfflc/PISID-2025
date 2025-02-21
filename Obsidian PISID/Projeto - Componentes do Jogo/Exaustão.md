@@ -1,0 +1,12 @@
+ver:
+	[[Condições de Final de Jogo]]
+	[[Marsamis]]
+	[[Regras do Jogo]]
+
+- [[Regras do Jogo|mecânica de jogo]] associada aos [[Marsamis|marsamis]] que percorrem os [[Labirintos|labirintos]]
+	- os marsamis são soltos nos labirintos por [[Largadas|rondas // largadas]]
+	- durante estas largadas, os marsamis movimentam-se pelas diferentes salas de forma aleatória
+	- ao fim de algum tempo / certo número de movimentos (confirmar o critério com o docente [[Perguntas para a Próxima Reunião com o Docente]]) os marsamis voluntariamente param de se movimentar devido ao cansaço acumulado
+	- o alcance deste estado de exaustão por parte de todos os marsamis presentes efetivamente termina a ronda de jogo
+		- existe uma outra mecânica de jogo que pode terminar / suspender a ronda / jogo ao jogador em causa, caso essa condição seja alcançada por todos os jogadores presentes, a ronda / jogo poderá terminar
+	- note-se que os marsamis, os seus movimentos e o seu cansaço são simulados pelos scripts de [[Python]] a correr no [[Servidor Remoto|servidor remoto]] fornecido pelos docentes

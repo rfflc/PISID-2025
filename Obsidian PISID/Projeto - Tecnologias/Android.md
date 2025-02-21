@@ -1,0 +1,2 @@
+ver:
+	[[Aplicação Android]]

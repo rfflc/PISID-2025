@@ -1,3 +1,0 @@
-ver:
-	[[Enunciado]]
-	[[PISID]]

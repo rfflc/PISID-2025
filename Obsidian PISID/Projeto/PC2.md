@@ -1,8 +1,0 @@
-ver:
-	[[Arquitetura]]
-	[[Java?]]
-	[[Python]]
-	[[MQTT]]
-	[[MySQL]]
-	[[PC1]]
-	[[Servidor Remoto]]
