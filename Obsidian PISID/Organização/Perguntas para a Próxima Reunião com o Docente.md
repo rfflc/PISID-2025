@@ -8,3 +8,4 @@ ver:
 - [ ] há distinção entre o jogo acabar por limite de ruído vs acabar por exaustão?
 - [ ] há alguma penalização (além de imobilização) para jogadores que atinjam o limite de ruído?
 - [ ] quão aleatório é o comportamento dos marsamis? i.e., se dois jogadores tiverem o mesmo número de marsamis posicionados nas mesmas salas, eles vão fazer os mesmos movimentos entre os dois "grupos"?
+- [ ] o número de marsamis solto em cada largada é constante e é igual de jogador para jogador? pode ser definido nos parâmetros do jogo?

@@ -13,4 +13,4 @@ ver:
 - no início de cada largada, os [[Marsamis|marsamis]] são distribuídos aleatoriamente pelas salas do labirinto
 	- pelo [[Enunciado|enunciado]]: "Cada marsami é colocado numa sala" - confirmar se é mesmo só um por sala ou se podem calhar dois na mesma sala [[Perguntas para a Próxima Reunião com o Docente]]
 	- a distribuição pelas diferentes salas é igual para todos os jogadores ou varia entre os jogadores? [[Perguntas para a Próxima Reunião com o Docente]]
-- após serem inicialmente colocados / soltos no labirinto, os marsamis deslocam-se aleatoriamente entre salas disponíveis até à [[Condições de Final de Jogo|exaustão]]
+- após serem inicialmente colocados / soltos no labirinto, os marsamis deslocam-se aleatoriamente entre [[Atuadores|salas disponíveis]] até à [[Condições de Final de Jogo|exaustão]]

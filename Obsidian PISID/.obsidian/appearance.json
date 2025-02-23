@@ -1,7 +1,7 @@
 {
   "cssTheme": "Vanilla AMOLED",
   "theme": "obsidian",
-  "accentColor": "#bbff00",
+  "accentColor": "#a6ff00",
   "translucency": true,
   "enabledCssSnippets": [
     "custom-bullets"

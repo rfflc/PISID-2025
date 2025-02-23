@@ -15,3 +15,4 @@ ver:
 	- número de [[Marsamis|marsamis]]
 	- número de [[Largadas|largadas / rondas]]
 	- duração de cada largada (? [[Perguntas para a Próxima Reunião com o Docente]]
+	- [[Ruído|limite de ruído]]

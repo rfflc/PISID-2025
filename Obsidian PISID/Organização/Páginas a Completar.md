@@ -40,12 +40,12 @@ Atualizar em função do enunciado:
 - [x] Gatilho
 - [x] Jogadores
 - [x] Labirintos
-- [ ] Largadas
-- [ ] Marsami (espécie)
-- [ ] Marsamis
-- [ ] Pontuação
-- [ ] Portas
-- [ ] Regras do Jogo
+- [x] Largadas
+- [x] Marsami (espécie)
+- [x] Marsamis
+- [x] Pontuação
+- [x] Portas
+- [x] Regras do Jogo
 - [ ] Ruído
 - [ ] Salas
 - [ ] Sensores
