@@ -46,14 +46,14 @@ Atualizar em função do enunciado:
 - [x] Pontuação
 - [x] Portas
 - [x] Regras do Jogo
-- [ ] Ruído
-- [ ] Salas
-- [ ] Sensores
-- [ ] Atuadores
-- [ ] Sensores de Entrada
-- [ ] Sensores de Movimento
-- [ ] Sensores de Ruído
-- [ ] Sensores de Saída
+- [x] Ruído
+- [x] Salas
+- [x] Sensores
+- [x] Atuadores
+- [x] Sensores de Entrada
+- [x] Sensores de Movimento
+- [x] Sensores de Ruído
+- [x] Sensores de Saída
 
 - [ ] Android
 - [ ] HTML

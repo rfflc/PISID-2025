@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"8164c3cc46de5f07","x":-260,"y":-160,"width":400,"height":400,"type":"file","file":"Projeto - Arquitetura e Requisitos/Servidor Remoto.md"},
+		{"id":"897751a7dacb2463","x":-260,"y":340,"width":400,"height":400,"type":"file","file":"Projeto - Arquitetura e Requisitos/PC1.md"},
+		{"id":"c40f9faf687fd769","x":280,"y":340,"width":400,"height":400,"type":"file","file":"Projeto - Arquitetura e Requisitos/Migração de MongoDB para SQL.md"},
+		{"id":"bdca499650c2a0c8","x":780,"y":340,"width":400,"height":400,"type":"file","file":"Projeto - Arquitetura e Requisitos/PC2.md"}
+	],
+	"edges":[
+		{"id":"f8ef1ffaf8ef833b","fromNode":"8164c3cc46de5f07","fromSide":"bottom","toNode":"897751a7dacb2463","toSide":"top"},
+		{"id":"2b7ec2c931814122","fromNode":"897751a7dacb2463","fromSide":"right","toNode":"c40f9faf687fd769","toSide":"left"},
+		{"id":"886ecbcc119c6935","fromNode":"c40f9faf687fd769","fromSide":"right","toNode":"bdca499650c2a0c8","toSide":"left"}
+	]
+}
