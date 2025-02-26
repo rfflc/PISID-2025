@@ -57,7 +57,7 @@ Atualizar em função do enunciado:
 
 - [ ] Android
 - [ ] HTML
-- [ ] Java?
+- [ ] Java
 - [ ] MongoDB
 - [ ] MQTT
 - [ ] MySQL
