@@ -55,12 +55,12 @@ Atualizar em função do enunciado:
 - [x] Sensores de Ruído
 - [x] Sensores de Saída
 
-- [ ] Android
-- [ ] HTML
-- [ ] Java?
-- [ ] MongoDB
-- [ ] MQTT
-- [ ] MySQL
-- [ ] PHP
-- [ ] Python
-- [ ] SQL
+- [x] Android
+- [x] HTML
+- [x] Java?
+- [x] MongoDB
+- [x] MQTT
+- [x] MySQL
+- [x] PHP
+- [x] Python
+- [x] SQL
