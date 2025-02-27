@@ -2,7 +2,7 @@ ver:
 	[[Android]]
 	[[Arquitetura]]
 	[[HTML]] ?
-	[[Java?]]
+	[[Java]]
 	[[Python]]
 	[[MQTT]]
 	[[Jogadores]]

@@ -1,7 +1,7 @@
 ver: 
 	[[Arquitetura]]
 	[[Corredores]]
-	[[Java?]]
+	[[Java]]
 	[[Python]]
 	[[MQTT]]
 	[[Labirintos]]

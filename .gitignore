@@ -180,3 +180,6 @@ mongod.log
 *.pid.lock
 *.sublime-*
 *.komodo*
+Obsidian PISID/.obsidian/workspace.json
+Obsidian PISID/.obsidian/graph.json
+Obsidian PISID/.obsidian/workspace.json
