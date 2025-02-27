@@ -7,7 +7,7 @@ ver:
 	[[Lista de Tarefas]]
 	[[Perguntas para a Próxima Reunião com o Docente]]
 	[[Registo de Horas Trabalhadas - Rui]]
-
+	[[Registo de Horas Trabalhadas - Rafael]]
 ##### Avaliação :
 - presença obrigatória nas reuniões (tolerância de 20% para faltas injustificadas)
 
