@@ -1,6 +1,6 @@
 ver: 
 	[[Arquitetura]]
-	[[Java?]]
+	[[Java]]
 	[[Python]]
 	[[Servidor Remoto]]
 

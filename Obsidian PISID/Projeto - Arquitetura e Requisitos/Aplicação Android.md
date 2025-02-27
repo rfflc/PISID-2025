@@ -2,7 +2,7 @@ ver:
 	[[Arquitetura]]
 	[[Android]]
 	[[Gráfico do Labirinto]]
-	[[Java?]]
+	[[Java]]
 	[[Python]]
 	[[MQTT]]
 	[[Jogadores]]
