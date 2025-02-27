@@ -10,9 +10,10 @@ ver:
 - [ ] há alguma penalização (além de imobilização) para jogadores que atinjam o limite de ruído?
 - [ ] quão aleatório é o comportamento dos marsamis? i.e., se dois jogadores tiverem o mesmo número de marsamis posicionados nas mesmas salas, eles vão fazer os mesmos movimentos entre os dois "grupos"?
 - [ ] o número de marsamis solto em cada largada é constante e é igual de jogador para jogador? pode ser definido nos parâmetros do jogo? 
-- [ ] objetivo é encurralar número igual de evens e odds no máximo de salas possíveis ao mesmo tempo?(__elaborar__). Depois de acionar o [[Gatilho]] termina a experiência e são contabilizados os pontos?
-- [ ] quando é que termina um jogo?
+- [x] objetivo é encurralar número igual de evens e odds no máximo de salas possíveis ao mesmo tempo?(__elaborar__). Depois de acionar o [[Gatilho]] termina a experiência e são contabilizados os pontos?
+- [x] como é que são feitos os pedidos para acionar o [[Gatilho
+- [x] quando é que termina um jogo?
 - [ ] como é que são atribuídos os identificadores? há numero igual de evens e odds?
-- [ ] os jogos ocorrem em simultâneo entre jogadores? 
-- [ ] esclarecer se ha mais algum [[Status]] além dos identificados?
-- [ ] para que os corredores tenham apenas um sentido significa isto que só há espaço para circular um marsami de cada vez? 
+- [x] os jogos ocorrem em simultâneo entre jogadores? 
+- [x] esclarecer se ha mais algum [[Status]] além dos identificados?
+- [x] para que os corredores tenham apenas um sentido significa isto que só há espaço para circular um marsami de cada vez? 

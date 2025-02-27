@@ -4,104 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a031b966605ddf35",
+        "id": "eb7ed03fc5792cbc",
         "type": "tabs",
-        "dimension": 48.567335243553,
         "children": [
           {
-            "id": "9eb5af5e466d8dc3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projeto - Tecnologias/Python.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Python"
-            }
-          },
-          {
-            "id": "fa3e1b37fbeb043a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organização/Perguntas para a Próxima Reunião com o Docente.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Perguntas para a Próxima Reunião com o Docente"
-            }
-          },
-          {
-            "id": "67bf78dca7d3fa31",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organização/Lista de Tarefas.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lista de Tarefas"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "6e800dcf7547f818",
-        "type": "tabs",
-        "dimension": 51.43266475644699,
-        "children": [
-          {
-            "id": "beaca5019adc5ff7",
-            "type": "leaf",
-            "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Canvas/Canvas Arquitetura.canvas",
-                "viewState": {
-                  "x": 605.0171414416827,
-                  "y": 610.1978133002619,
-                  "zoom": -0.8700842456022897
-                }
-              },
-              "icon": "lucide-layout-dashboard",
-              "title": "Canvas Arquitetura"
-            }
-          },
-          {
-            "id": "cc31b7c1e9208615",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projeto - Arquitetura e Requisitos/Arquitetura.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Arquitetura"
-            }
-          },
-          {
-            "id": "a4786cb01da3ba3c",
+            "id": "d588e757c46f90f5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -115,35 +22,77 @@
             }
           },
           {
-            "id": "265f839bb098469c",
+            "id": "48e2d1a1ae60b30d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projeto - Tecnologias/Java.md",
+                "file": "Projeto - Componentes do Jogo/Marsamis.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Java"
+              "title": "Marsamis"
             }
           },
           {
-            "id": "f4467b7ee099666c",
+            "id": "dfff80221b18e45e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Organização/Registo de Horas Trabalhadas - Rui.md",
+                "file": "Organização/Perguntas para a Próxima Reunião com o Docente.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Registo de Horas Trabalhadas - Rui"
+              "title": "Perguntas para a Próxima Reunião com o Docente"
             }
           },
           {
-            "id": "35330d1808e71f8f",
+            "id": "7b5aece71b6a04cf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rafael/2025-02-27.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-02-27"
+            }
+          },
+          {
+            "id": "a8e02821a1e0e9b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projeto - Arquitetura e Requisitos/Aplicação Android.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Aplicação Android"
+            }
+          },
+          {
+            "id": "682abd95fd8a3c5b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projeto - Componentes do Jogo/Portas.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Portas"
+            }
+          },
+          {
+            "id": "7f91103a030294a8",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -154,20 +103,6 @@
               },
               "icon": "lucide-file",
               "title": "Lista de Tarefas"
-            }
-          },
-          {
-            "id": "4d9615a85927ee32",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organização/Lista Preparada de Perguntas para o Docente.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lista Preparada de Perguntas para o Docente"
             }
           }
         ],
@@ -194,7 +129,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "File explorer"
             }
           },
           {
@@ -203,8 +138,8 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
-                "matchingCase": false,
+                "query": "Regis",
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -228,7 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 229.5
   },
   "right": {
     "id": "63dd2da71e8e0733",
@@ -244,7 +179,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Organização/Registo de Horas Trabalhadas - Rui.md",
+                "file": "Projeto/Corredores.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -254,7 +189,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Registo de Horas Trabalhadas - Rui"
+              "title": "Backlinks for Corredores"
             }
           },
           {
@@ -263,12 +198,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Organização/Registo de Horas Trabalhadas - Rui.md",
+                "file": "Projeto/Corredores.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Registo de Horas Trabalhadas - Rui"
+              "title": "Outgoing links from Corredores"
             }
           },
           {
@@ -310,49 +245,52 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "daily-notes:Open today's note": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false
     }
   },
-  "active": "265f839bb098469c",
+  "active": "7b5aece71b6a04cf",
   "lastOpenFiles": [
-    "Projeto - Componentes do Jogo/Regras do Jogo.md",
-    "Projeto - Arquitetura e Requisitos/Servidor Remoto.md",
-    "Projeto - Arquitetura e Requisitos/Arquitetura.md",
-    "Organização/Registo de Horas Trabalhadas - Rui.md",
-    "Organização/Lista de Tarefas.md",
-    "Projeto - Arquitetura e Requisitos/Enunciado.md",
-    "Canvas/Canvas Arquitetura.canvas",
     "Organização/Perguntas para a Próxima Reunião com o Docente.md",
-    "Projeto - Componentes do Jogo/Labirintos.md",
-    "Organização/Lista Preparada de Perguntas para o Docente.md",
-    "Projeto - Componentes do Jogo/Jogadores.md",
+    "Rafael/2025-02-27.md",
+    "Organização/Lista de Tarefas.md",
+    "Cadeira/PISID.md",
+    "Projeto - Componentes do Jogo/Marsamis.md",
+    "Organização/Registo de Horas Trabalhadas - Rafael.md",
+    "Projeto - Componentes do Jogo/Portas.md",
     "Projeto - Componentes do Jogo/Atuadores.md",
-    "Projeto - Arquitetura e Requisitos/Gráfico do Labirinto.md",
-    "Imagens/Screenshot 2025-02-18 at 19.04.47.png",
-    "Projeto - Componentes do Jogo/Corredores.md",
-    "Projeto - Componentes do Jogo/Condições de Final de Jogo.md",
+    "Projeto - Arquitetura e Requisitos/Aplicação Android.md",
     "Projeto - Arquitetura e Requisitos/Administrador da Aplicação.md",
-    "Projeto - Tecnologias/Python.md",
-    "Organização/Páginas a Completar.md",
-    "Projeto - Tecnologias/SQL.md",
-    "Projeto - Tecnologias/Java.md",
-    "Projeto - Tecnologias/PHP.md",
-    "Projeto - Tecnologias/MySQL.md",
-    "Projeto - Tecnologias/MQTT.md",
-    "Projeto - Tecnologias/MongoDB.md",
-    "Projeto - Tecnologias/Java.md",
-    "Projeto - Tecnologias/HTML.md",
-    "Projeto - Tecnologias/Android.md",
+    "Projeto - Componentes do Jogo/Gatilho.md",
+    "Organização/Lista Preparada de Perguntas para o Docente.md",
+    "Projeto - Arquitetura e Requisitos/Mensagens de Movimento.md",
+    "Rafael",
+    "Projeto - Componentes do Jogo/Status.md",
+    "Untitled.canvas",
+    "Canvas/Canvas Arquitetura.canvas",
     "Canvas",
+    "Projeto - Componentes do Jogo/Sensores de Movimento.md",
+    "Projeto - Arquitetura e Requisitos/Enunciado.md",
+    "Projeto - Arquitetura e Requisitos/Gráfico do Labirinto.md",
+    "Projeto - Componentes do Jogo/Exaustão.md",
+    "Projeto - Arquitetura e Requisitos/Requisitos.md",
+    "Projeto - Componentes do Jogo/Ruído.md",
+    "Organização/Registo de Horas Trabalhadas - Rui.md",
+    "Organização/Páginas a Completar.md",
+    "Projeto - Arquitetura e Requisitos/Stored Procedures.md",
+    "Projeto - Arquitetura e Requisitos/Servidor Remoto.md",
+    "Projeto - Arquitetura e Requisitos/PC1.md",
+    "Projeto - Arquitetura e Requisitos/PC2.md",
+    "Canvas Arquitetura.canvas",
     "Projeto - Componentes do Jogo",
     "Projeto - Arquitetura e Requisitos",
     "Imagens/Screenshot 2025-02-18 at 19.02.34.png",
     "Imagens/Screenshot 2025-02-18 at 19.02.44.png",
+    "Imagens/Screenshot 2025-02-18 at 19.04.47.png",
     "Imagens/Screenshot 2025-02-18 at 19.04.56.png",
     "Imagens/Screenshot 2025-02-18 at 19.04.12.png",
     "Imagens/Screenshot 2025-02-18 at 19.04.20.png",
