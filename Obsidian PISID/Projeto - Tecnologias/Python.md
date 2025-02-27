@@ -1,2 +1,4 @@
-ver:
+  ver:
 	[[Arquitetura]]
+
+- instalar o PIP

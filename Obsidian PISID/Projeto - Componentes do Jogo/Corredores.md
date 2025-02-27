@@ -12,7 +12,7 @@ ver:
 		- existem [[Sensores de Entrada|sensores de entrada nas salas]] e [[Sensores de Saída|sensores de saída das salas]] (a nomenclatura é feita do ponto de vista das salas)
 		- é garantido que uma passagem lida pelos sensores de movimento corresponda à passagem de um único marsami no sentido correto
 - cada corredor une apenas duas salas
-	- há becos? (corredores ligados apenas a uma sal) [[Perguntas para a Próxima Reunião com o Docente]]
+	- há becos? (corredores ligados apenas a uma sala) [[Perguntas para a Próxima Reunião com o Docente]]
 	- há loops de dar voltas que passem por outras salas? [[Perguntas para a Próxima Reunião com o Docente]]
 	- há loops que começam e acabam na mesma sala ? [[Perguntas para a Próxima Reunião com o Docente]]
 	- vários corredores podem "entrar" na mesma sala
