@@ -12,7 +12,7 @@ a contagem pelo jogador não é feita "ao segundo" para saber quando pressionar 
 - [ ] sim, ronda
 - [ ] sim, portas
 - [ ] sim, outro - 
-- [ ] não
+- [x] não
 
  é possível fazer com que a ronda acabe ao encurralar todos os marsamis?
 - [ ] sim
