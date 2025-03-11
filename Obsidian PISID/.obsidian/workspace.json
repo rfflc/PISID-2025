@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "9225d1a0e857b37b",
+        "id": "fd95935d4256d4b7",
         "type": "tabs",
         "children": [
           {
-            "id": "55a4365527726acf",
+            "id": "4affe5c44ae535c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projeto - Componentes do Jogo/Sensores.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Sensores"
+              "title": "New tab"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projeto - Componentes do Jogo/Sensores.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Sensores"
+              "title": "Backlinks"
             }
           },
           {
@@ -155,7 +150,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -167,8 +163,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "55a4365527726acf",
+  "active": "2e73bc4ef77fe403",
   "lastOpenFiles": [
+    "Projeto - Componentes do Jogo/Sensores.md",
     "Untitled.canvas",
     "Rafael/Untitled.canvas",
     "Rafael/2025-03-06.md",
@@ -186,7 +183,6 @@
     "Projeto - Tecnologias",
     "Projeto - Componentes do Jogo/Sensores de Movimento.md",
     "Projeto - Componentes do Jogo/Status.md",
-    "Projeto - Componentes do Jogo/Sensores.md",
     "Projeto - Componentes do Jogo/Sensores de Saída.md",
     "Projeto - Componentes do Jogo/Sensores de Ruído.md",
     "Projeto - Componentes do Jogo/Sensores de Entrada.md",
