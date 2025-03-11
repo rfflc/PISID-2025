@@ -1,6 +1,8 @@
 ver:
 	[[PISID]]
 
+
+
 - [x] completar as notas do obsidian
 - [x] fazer uma página de notas sobre markdown
 - [x] ligar os nós do grafo
