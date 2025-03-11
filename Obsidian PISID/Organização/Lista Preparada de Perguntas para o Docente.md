@@ -3,7 +3,7 @@ ver:
 
 é mencionado no enunciado que a contagem de odds e evens é feita no final de cada largada // é dito que o objetivo é que cada jogador saiba quantos odds e quantos evens há em cada sala. o objetivo não é somar pontos?
 a contagem pelo jogador não é feita "ao segundo" para saber quando pressionar o gatilho?
-- [ ] somar pontos
+- [x] somar pontos
 - [ ] contar no final
 - [ ] ambos?
 
@@ -12,7 +12,7 @@ a contagem pelo jogador não é feita "ao segundo" para saber quando pressionar 
 - [ ] sim, ronda
 - [ ] sim, portas
 - [ ] sim, outro - 
-- [ ] não
+- [x] não
 
  é possível fazer com que a ronda acabe ao encurralar todos os marsamis?
 - [ ] sim
