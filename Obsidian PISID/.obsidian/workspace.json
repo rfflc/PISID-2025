@@ -4,24 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "fd95935d4256d4b7",
+        "id": "4b1dd26a212a6faf",
         "type": "tabs",
         "children": [
           {
-            "id": "4affe5c44ae535c9",
+            "id": "2cbce4a2fb5362c8",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Rafael/Untitled.canvas",
-                "viewState": {
-                  "x": 37,
-                  "y": 225,
-                  "zoom": -0.33638764766869766
-                }
+                "file": "Organização/Lista de Tarefas.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "Lista de Tarefas"
             }
           }
         ]
@@ -97,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Organização/Lista de Tarefas.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for Lista de Tarefas"
             }
           },
           {
@@ -170,12 +168,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2e73bc4ef77fe403",
+  "active": "2cbce4a2fb5362c8",
   "lastOpenFiles": [
+    "Pasted image 20250311123313.png",
+    "Organização/Lista de Tarefas.md",
+    "Projeto - Componentes do Jogo/Condições de Final de Jogo.md",
+    "Organização/Registo de Horas Trabalhadas - Rui.md",
+    "Organização/Registo de Horas Trabalhadas - Rafael.md",
+    "Organização/Composição do Grupo 22.md",
+    "Untitled.canvas",
     "Rafael/Untitled.canvas",
     "Rafael/2025-03-06.md",
     "Rafael/2025-02-27.md",
-    "Untitled.canvas",
     "Projeto - Componentes do Jogo/Sensores.md",
     "Rafael",
     "Projeto - Tecnologias/SQL.md",
@@ -196,11 +200,6 @@
     "Projeto - Componentes do Jogo/Salas.md",
     "Projeto - Componentes do Jogo/Ruído.md",
     "Projeto - Componentes do Jogo/Regras do Jogo.md",
-    "Projeto - Componentes do Jogo/Portas.md",
-    "Projeto - Componentes do Jogo/Pontuação.md",
-    "Projeto - Componentes do Jogo/Marsamis.md",
-    "Projeto - Componentes do Jogo/Marsami (espécie).md",
-    "Projeto - Componentes do Jogo/Largadas.md",
     "Projeto - Componentes do Jogo",
     "Projeto - Arquitetura e Requisitos",
     "Organização",
@@ -213,7 +212,6 @@
     "Imagens/Screenshot 2025-02-18 at 19.04.03.png",
     "Imagens/Screenshot 2025-02-18 at 19.03.54.png",
     "Imagens/Screenshot 2025-02-18 at 19.03.33.png",
-    "Imagens/Screenshot 2025-02-18 at 19.02.44.png",
     "Imagens",
     "Comandos e Instruções",
     "Canvas/Canvas Arquitetura.canvas",
