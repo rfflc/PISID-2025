@@ -6,4 +6,4 @@ ver:
 	[[Tabelas Recomendadas]]
 
 - sistema operativo
-- versão utilizada: [[Lista de Tarefas]]
+- versão utilizada: [[Lista de Tarefas - Rui]]

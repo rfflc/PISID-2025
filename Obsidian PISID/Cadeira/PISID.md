@@ -4,7 +4,7 @@
 ver:
 	[[Composição do Grupo 22]]
 	[[Enunciado]]
-	[[Lista de Tarefas]]
+	[[Lista de Tarefas - Rui]]
 	[[Perguntas para a Próxima Reunião com o Docente]]
 	[[Registo de Horas Trabalhadas - Rui]]
 	[[Registo de Horas Trabalhadas - Rafael]]
