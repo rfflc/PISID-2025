@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projeto - Arquitetura e Requisitos/A NÃO IMPLEMENTAR.md",
+                "file": "Organização/Lista Preparada de Perguntas para o Docente.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "A NÃO IMPLEMENTAR"
+              "title": "Lista Preparada de Perguntas para o Docente"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Organização/Lista de Tarefas - Rui.md",
+                "file": "Organização/Composição do Grupo 22.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lista de Tarefas - Rui"
+              "title": "Composição do Grupo 22"
             }
           }
         ]
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projeto - Arquitetura e Requisitos/A NÃO IMPLEMENTAR.md",
+                "file": "Organização/Lista Preparada de Perguntas para o Docente.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for A NÃO IMPLEMENTAR"
+              "title": "Backlinks for Lista Preparada de Perguntas para o Docente"
             }
           },
           {
@@ -184,23 +184,26 @@
   },
   "active": "1fdb46c6a1af289c",
   "lastOpenFiles": [
+    "Projeto - Componentes do Jogo/Outliers.md",
+    "Organização/Lista de Tarefas - Rui.md",
+    "Imagens/Screenshot 2025-03-11 at 17.01.00.png",
+    "Imagens/Screenshot 2025-03-11 at 17.00.50.png",
+    "Imagens/Screenshot 2025-03-11 at 17.00.42.png",
+    "Comandos e Instruções/Comandos Servidor Remoto.md",
+    "Comandos e Instruções/Comandos Executáveis.md",
+    "Organização/Composição do Grupo 22.md",
+    "Organização/Lista Preparada de Perguntas para o Docente.md",
+    "Organização/Páginas a Completar.md",
+    "Organização/Lista de Tarefas.md",
+    "Projeto - Arquitetura e Requisitos/Administrador da Aplicação.md",
+    "Projeto - Arquitetura e Requisitos/A NÃO IMPLEMENTAR.md",
     "Organização/Registo de Horas Trabalhadas - Rui.md",
     "Organização/Registo de Horas Trabalhadas - Rafael.md",
     "Organização/Perguntas para a Próxima Reunião com o Docente.md",
-    "Organização/Lista Preparada de Perguntas para o Docente.md",
-    "Organização/Páginas a Completar.md",
-    "Organização/Lista de Tarefas - Rui.md",
-    "Organização/Composição do Grupo 22.md",
     "Projeto - Arquitetura e Requisitos/Tabelas Recomendadas.md",
-    "Imagens/Screenshot 2025-03-11 at 17.00.42.png",
-    "Imagens/Screenshot 2025-03-11 at 17.01.00.png",
-    "Comandos e Instruções/Comandos Servidor Remoto.md",
-    "Comandos e Instruções/Comandos Executáveis.md",
     "Comandos e Instruções/Apontamentos sobre Markdown.md",
     "Comandos e Instruções/Comandos MongoDB (Windows).md",
     "Comandos e Instruções/Comandos MongoDB (MacOS).md",
-    "Imagens/Screenshot 2025-03-11 at 17.00.50.png",
-    "Projeto - Componentes do Jogo/Outliers.md",
     "Projeto - Arquitetura e Requisitos/Users.md",
     "Projeto - Componentes do Jogo/Regras do Jogo.md",
     "Projeto - Arquitetura e Requisitos/Arquitetura.md",
@@ -213,10 +216,6 @@
     "Projeto - Componentes do Jogo/Sensores.md",
     "Rafael",
     "Projeto - Tecnologias/SQL.md",
-    "Projeto - Tecnologias/Python.md",
-    "Projeto - Tecnologias/PHP.md",
-    "Projeto - Tecnologias/MySQL.md",
-    "Projeto - Tecnologias/MongoDB.md",
     "Projeto - Tecnologias",
     "Projeto - Componentes do Jogo",
     "Projeto - Arquitetura e Requisitos",
