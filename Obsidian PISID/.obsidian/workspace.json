@@ -8,17 +8,31 @@
         "type": "tabs",
         "children": [
           {
+            "id": "1fdb46c6a1af289c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projeto - Arquitetura e Requisitos/A NÃO IMPLEMENTAR.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "A NÃO IMPLEMENTAR"
+            }
+          },
+          {
             "id": "2cbce4a2fb5362c8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Organização/Lista de Tarefas.md",
+                "file": "Organização/Lista de Tarefas - Rui.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lista de Tarefas"
+              "title": "Lista de Tarefas - Rui"
             }
           }
         ]
@@ -94,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Organização/Lista de Tarefas.md",
+                "file": "Projeto - Arquitetura e Requisitos/A NÃO IMPLEMENTAR.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Lista de Tarefas"
+              "title": "Backlinks for A NÃO IMPLEMENTAR"
             }
           },
           {
@@ -168,14 +182,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2cbce4a2fb5362c8",
+  "active": "1fdb46c6a1af289c",
   "lastOpenFiles": [
-    "Pasted image 20250311123313.png",
-    "Organização/Lista de Tarefas.md",
-    "Projeto - Componentes do Jogo/Condições de Final de Jogo.md",
     "Organização/Registo de Horas Trabalhadas - Rui.md",
     "Organização/Registo de Horas Trabalhadas - Rafael.md",
+    "Organização/Perguntas para a Próxima Reunião com o Docente.md",
+    "Organização/Lista Preparada de Perguntas para o Docente.md",
+    "Organização/Páginas a Completar.md",
+    "Organização/Lista de Tarefas - Rui.md",
     "Organização/Composição do Grupo 22.md",
+    "Projeto - Arquitetura e Requisitos/Tabelas Recomendadas.md",
+    "Imagens/Screenshot 2025-03-11 at 17.00.42.png",
+    "Imagens/Screenshot 2025-03-11 at 17.01.00.png",
+    "Comandos e Instruções/Comandos Servidor Remoto.md",
+    "Comandos e Instruções/Comandos Executáveis.md",
+    "Comandos e Instruções/Apontamentos sobre Markdown.md",
+    "Comandos e Instruções/Comandos MongoDB (Windows).md",
+    "Comandos e Instruções/Comandos MongoDB (MacOS).md",
+    "Imagens/Screenshot 2025-03-11 at 17.00.50.png",
+    "Projeto - Componentes do Jogo/Outliers.md",
+    "Projeto - Arquitetura e Requisitos/Users.md",
+    "Projeto - Componentes do Jogo/Regras do Jogo.md",
+    "Projeto - Arquitetura e Requisitos/Arquitetura.md",
+    "Pasted image 20250311123313.png",
+    "Projeto - Componentes do Jogo/Condições de Final de Jogo.md",
     "Untitled.canvas",
     "Rafael/Untitled.canvas",
     "Rafael/2025-03-06.md",
@@ -187,19 +217,7 @@
     "Projeto - Tecnologias/PHP.md",
     "Projeto - Tecnologias/MySQL.md",
     "Projeto - Tecnologias/MongoDB.md",
-    "Projeto - Tecnologias/MQTT.md",
-    "Projeto - Tecnologias/Java.md",
-    "Projeto - Tecnologias/HTML.md",
-    "Projeto - Tecnologias/Android.md",
     "Projeto - Tecnologias",
-    "Projeto - Componentes do Jogo/Sensores de Movimento.md",
-    "Projeto - Componentes do Jogo/Status.md",
-    "Projeto - Componentes do Jogo/Sensores de Saída.md",
-    "Projeto - Componentes do Jogo/Sensores de Ruído.md",
-    "Projeto - Componentes do Jogo/Sensores de Entrada.md",
-    "Projeto - Componentes do Jogo/Salas.md",
-    "Projeto - Componentes do Jogo/Ruído.md",
-    "Projeto - Componentes do Jogo/Regras do Jogo.md",
     "Projeto - Componentes do Jogo",
     "Projeto - Arquitetura e Requisitos",
     "Organização",
@@ -209,9 +227,6 @@
     "Imagens/Screenshot 2025-02-18 at 19.04.31.png",
     "Imagens/Screenshot 2025-02-18 at 19.04.20.png",
     "Imagens/Screenshot 2025-02-18 at 19.04.12.png",
-    "Imagens/Screenshot 2025-02-18 at 19.04.03.png",
-    "Imagens/Screenshot 2025-02-18 at 19.03.54.png",
-    "Imagens/Screenshot 2025-02-18 at 19.03.33.png",
     "Imagens",
     "Comandos e Instruções",
     "Canvas/Canvas Arquitetura.canvas",

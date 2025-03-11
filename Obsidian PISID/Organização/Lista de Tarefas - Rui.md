@@ -3,7 +3,9 @@ ver:
 
 
 
-- [ ] atualizar a lista da composição do grupo
+- [ ] atualizar a lista da composição do grupo (ver folha grupo)
+- [ ] organizar pastas git
+- [ ] rever scripts
 
 - [x] completar as notas do obsidian
 - [x] fazer uma página de notas sobre markdown
