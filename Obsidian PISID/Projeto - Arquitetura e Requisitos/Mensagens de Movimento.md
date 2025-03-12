@@ -7,7 +7,7 @@ ver:
 	[[Exaustão]]
 	[[Gráfico do Labirinto]]
 	[[Jogadores]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Android]]
 	[[Marsamis]]
 	[[Portas]]
 	[[Regras do Jogo]]
