@@ -2,7 +2,7 @@ ver:
 	[[Aplicação Android]]
 	[[Arquitetura]]
 	[[Gráfico do Labirinto]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Android]]
 	[[Tabelas Recomendadas]]
 
 - sistema operativo

@@ -2,7 +2,7 @@ ver:
 	[[Arquitetura]]
 	[[HTML]]
 	[[Jogadores]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Android]]
 	[[MySQL]]
 	[[PC2]]
 	[[PHP]] ?

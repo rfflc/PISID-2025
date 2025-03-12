@@ -6,7 +6,7 @@ ver:
 	[[Python]]
 	[[MQTT]]
 	[[Jogadores]]
-	[[Jogadores Tipo 1]]
+	[[Jogadores Web]]
 	[[MySQL]]
 	[[PC2]]
 	[[PHP]]

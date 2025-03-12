@@ -3,7 +3,7 @@ ver:
 	[[Administrador da Base de Dados]]
 	[[Administrador da Aplicação]]
 	[[HTML]]
-	[[Jogadores Tipo 1]]
+	[[Jogadores Web]]
 	[[Requisitos]]
 
 os formulários HTML do [[Administrador da Aplicação|administrador da aplicação]] [[A NÃO IMPLEMENTAR|NÃO SÃO PARA IMPLEMENTAR]]

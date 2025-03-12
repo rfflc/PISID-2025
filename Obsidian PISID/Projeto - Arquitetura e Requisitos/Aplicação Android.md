@@ -6,7 +6,7 @@ ver:
 	[[Python]]
 	[[MQTT]]
 	[[Jogadores]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Android]]
 	[[Projeto - Tecnologias/SQL]]
 	[[PC2]]
 	[[PHP]]
