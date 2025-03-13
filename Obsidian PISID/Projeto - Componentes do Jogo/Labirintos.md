@@ -19,6 +19,6 @@ ver:
 	- na junção dos dois existem [[Portas|portas]] que podem ser [[Atuadores|abertas e fechadas pelos jogadores]] de forma a limitar os [[Mensagens de Movimento|movimentos dos marsamis]]
 		- nestas portas existem [[Sensores de Movimento|sensores de movimento]] que registam quando um marsami [[Sensores de Entrada|entra]] ou [[Sensores de Saída|sai]] de uma sala
 - cada labirinto tem também um [[Sensores de Ruído|sensor de ruído]] que deteta o nível de [[Ruído|ruído]]
-	- caso o nível de ruído exceda um [[Condições de Final de Jogo|limite predefinido]], [[Regras do Jogo|a ronda termina para o jogador]] (termina mesmo? e só a ronda ou o jogo inteiro? [[Perguntas para a Próxima Reunião com o Docente]])
-- "no início, a [[Configuração do Labirinto|planta do labirinto]] é igual para todos" - isto refere-se a como a dinâmica de cada labirinto individual pode mudar por causa de portas fechadas ou há alguma forma de alterar a configuração dos labirintos / mudam a cada [[Largadas|ronda / largada]]? [[Perguntas para a Próxima Reunião com o Docente]] (confirmar)
-	- as plantas divergem umas das outras apenas nas portas abertas e fechadas pelos jogadores (ou pelos sistemas automáticos), ergo, a planta não varia (pelo menos durante de cada largada)
+	- caso o nível de ruído exceda um [[Condições de Final de Jogo|limite predefinido]], [[Regras do Jogo|o jogo termina para o jogador]]
+- "no início, a [[Configuração do Labirinto|planta do labirinto]] é igual para todos" - isto refere-se a como a dinâmica de cada labirinto individual pode mudar por causa de portas fechadas
+	- as plantas divergem umas das outras apenas nas portas abertas e fechadas pelos jogadores (ou pelos sistemas automáticos), ergo, a planta não varia
