@@ -5,6 +5,7 @@ ver:
 - [ ] rever as páginas todas
 - [ ] rever enunciado atualizado
 - [ ] completar a composição do grupo - ver folha grupo
+- [ ] criar páginas para as diferentes camadas de python
 
 - [x] completar as notas do obsidian
 - [x] fazer uma página de notas sobre markdown
