@@ -6,4 +6,5 @@ ver:
 	[[Tabelas Recomendadas]]
 
 - sistema operativo
-- versão utilizada: [[Lista de Tarefas - Rui]]
+- versão a utilizar - 
+- podemos instalar a build fornecida num dispositivo ou então utilizar um emulador (e.g., Android Studio)

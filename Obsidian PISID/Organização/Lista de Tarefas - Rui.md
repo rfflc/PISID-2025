@@ -6,6 +6,9 @@ ver:
 - [ ] rever enunciado atualizado
 - [ ] completar a composição do grupo - ver folha grupo
 - [ ] criar páginas para as diferentes camadas de python
+- [ ] ver versão utilizada para o android
+- [ ] same for html
+- [ ] página xampp
 
 - [x] completar as notas do obsidian
 - [x] fazer uma página de notas sobre markdown
