@@ -10,9 +10,7 @@ ver:
 	[[Tabelas Recomendadas]]
 
 - parâmetros a ser escolhidos / definidos pelos [[Jogadores|jogadores]] ou pelo [[Administrador da Aplicação|administrador da aplicação]] antes do início de cada jogo
-- os parâmetros em si ainda não foram confirmados mas é razoavelmente expectável que incluam:
-	- número de jogadores
+- os parâmetros em si ainda não foram definidos mas podem incluir:
 	- número de [[Marsamis|marsamis]]
-	- número de [[Largadas|largadas / rondas]]
-	- duração de cada largada (? [[Perguntas para a Próxima Reunião com o Docente]]
+	- duração de cada largada
 	- [[Ruído|limite de ruído]]
