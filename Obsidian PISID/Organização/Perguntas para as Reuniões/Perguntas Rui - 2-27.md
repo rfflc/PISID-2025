@@ -1,5 +1,5 @@
 ver:
-	[[Perguntas para a Próxima Reunião com o Docente]]
+	[[Perguntas Rui - 2-20]]
 
 é mencionado no enunciado que a contagem de odds e evens é feita no final de cada largada // é dito que o objetivo é que cada jogador saiba quantos odds e quantos evens há em cada sala. o objetivo não é somar pontos?
 a contagem pelo jogador não é feita "ao segundo" para saber quando pressionar o gatilho?
