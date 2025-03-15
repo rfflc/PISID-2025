@@ -1,0 +1,10 @@
+- [ ] [[Perguntas para a Próxima Reunião com o Docente]]
+- [ ] [[Lista Preparada de Perguntas para o Docente]]
+- [ ] [[Perguntas Docente 13-3 - Rui]]
+- [ ] apenas uma largada por ronda, apenas uma ronda por jogo
+- [ ] protocolo de mensagens de movimento quando o marsami está encurralado / sala final / exaustão em [[Mensagens de Movimento]]
+- [ ] todas as camadas de python usam obrigatoriamente mqtt
+- [ ] quantidade de salas e numero de gatilhos por sala para cada jogo (10 x 3)
+- [ ] instruções / configs para lançar os executáveis
+- [ ] página Coleções MongoDB
+- [ ] página mensagens de movimento

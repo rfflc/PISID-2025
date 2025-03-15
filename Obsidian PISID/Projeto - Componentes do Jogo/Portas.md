@@ -21,5 +21,5 @@ ver:
 		- fechar uma porta individual (porta específica à escolha)
 		- abrir todas as portas
 		- fechar todas as portas
-	- não existe restrição na frequência com que um jogador pode abrir / fechar as portas ? [[Perguntas para a Próxima Reunião com o Docente]]
-- as portas são consideradas funcionalmente perfeitas, no sentido em que não têm falhas, não podem avariar, não podem ser destruídas ou abertas pelos marsamis, não podem ser ativadas pelo jogador quando os [[Condições de Final de Jogo|sistemas automáticos]] intervêm, abrem e fecham imediatamente sem possibilidade de "entalar" um marsami e não [[Ruído|fazem barulho]] quando são operadas (confirmar [[Perguntas para a Próxima Reunião com o Docente]])
+	- não existe restrição na frequência com que um jogador pode abrir e fechar as portas
+- as portas são consideradas funcionalmente perfeitas, no sentido em que não têm falhas, não podem avariar, não podem ser destruídas ou abertas pelos marsamis, não podem ser ativadas pelo jogador quando os [[Condições de Final de Jogo|sistemas automáticos]] intervêm, abrem e fecham imediatamente sem possibilidade de "entalar" um marsami e não [[Ruído|fazem barulho]] quando são operadas
