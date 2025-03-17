@@ -35,3 +35,11 @@ Potenciais outliers para mensagens de movimento:
 Potenciais outliers para mensagens de ruído:
 - [ ] valor negativo
 - [ ] labirinto / player errado
+
+Outliers que terão de ser tratados na camada 2 ([[Migração de MongoDB para SQL|camada de migração]]):
+- player errado
+- marsami com ID superior à quantidade de marsamis no jogo
+- sala com ID superior à quantidade de salas no labirinto
+- corredor impossível
+- corredor fechado
+- 
