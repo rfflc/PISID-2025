@@ -1,6 +1,3 @@
-- [ ] [[Perguntas Rui - 2-20]]
-- [ ] [[Perguntas Rui - 2-27]]
-- [ ] [[Perguntas Rui - 3-13]]
 - [ ] apenas uma largada por ronda, apenas uma ronda por jogo
 - [ ] protocolo de mensagens de movimento quando o marsami está encurralado / sala final / exaustão em [[Mensagens de Movimento]]
 - [ ] todas as camadas de python usam obrigatoriamente mqtt
