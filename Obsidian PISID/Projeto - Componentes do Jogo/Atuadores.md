@@ -16,7 +16,8 @@ ver:
 	- fechar uma porta individual (porta específica à escolha)
 	- abrir todas as portas
 	- fechar todas as portas
-	- as opções de abrir e fechar TODAS as portas afetam os outros labirintos? podem em algum modo extra / hardcore? [[Perguntas para a Próxima Reunião com o Docente]] (reaching, IK)
-- a posição das portas é a meio do corredor ou na ligação corredor-sala? [[Perguntas para a Próxima Reunião com o Docente]]
+	- as opções de abrir e fechar todas as portas não afeta os outros labirintos
+- as portas estão posicionadas na ligação corredor-sala
+	- dado que os movimentos pelos [[Corredores|corredores]] e o acionar de portas são ambos considerados atómicos e perfeitos, não faz grande diferença
 - a ativação do botão resulta numa emissão de sinal para o [[Servidor Remoto|servidor remoto]] para que este possa refletir as mudanças causadas pelo jogador na simulação dos [[Mensagens de Movimento|movimentos dos marsamis]]
 	- esta informação será reflectida na BD do [[PC1]] e [[Migração de MongoDB para SQL|subsequentemente]] na BD do [[PC2]]

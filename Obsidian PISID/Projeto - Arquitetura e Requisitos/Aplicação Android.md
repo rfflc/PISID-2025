@@ -6,7 +6,7 @@ ver:
 	[[Python]]
 	[[MQTT]]
 	[[Jogadores]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Android]]
 	[[Projeto - Tecnologias/SQL]]
 	[[PC2]]
 	[[PHP]]
@@ -25,4 +25,4 @@ ver:
 		- [[Gatilho|gatilho]]
 			- para marcar [[Pontuação|pontos]] quando o número de [[Marsamis|evens e odds]] é igual!
 
-[[Screenshot 2025-02-18 at 19.04.47.png]]
+![[Screenshot 2025-02-18 at 19.04.47.png]]

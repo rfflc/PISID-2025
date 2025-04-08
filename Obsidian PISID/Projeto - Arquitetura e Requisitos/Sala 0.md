@@ -8,4 +8,4 @@ ver:
 		- neste caso, exclusivamente a sala de origem é declarada como sala 0
 	- um marsami retido numa [[Salas|sala]] por caminhos barrados pelos [[Atuadores|atuadores]] ativados pelo [[Jogadores|jogador]] ou pelos [[Condições de Final de Jogo|sistemas automáticos]]
 		- neste caso, ambas as salas são declaradas como sala 0
-	- não existe nenhum caso (que seja conhecido [[Perguntas para a Próxima Reunião com o Docente]]) no qual a sala 0 seja declarada exclusivamente como sala de destino
+	- não existe nenhum caso (que seja conhecido) no qual a sala 0 seja declarada exclusivamente como sala de destino
