@@ -1,3 +1,3 @@
 ver:
-	[[Projeto - Tecnologias/SQL]]
+	[[SQL]]
 	[[PC2]]

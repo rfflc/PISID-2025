@@ -1,9 +1,9 @@
 ver:
-	[[Lista Preparada de Perguntas para o Docente]]
+	[[Perguntas Rui - 2-27]]
 	[[PISID]]
 
 - [ ] é mencionado no enunciado que a contagem de odds e evens é feita no final de cada largada / é dito que o objetivo é que cada jogador saiba quantos odds e quantos evens há em cada sala. o objetivo não é somar pontos? a contagem pelo jogador não é feita "ao segundo" para saber quando pressionar o gatilho?
-- [ ] é possível que marsamis fiquem "presos" nos corredores quando se fecham as portas? seja no final da ronda ou por portas fechadas (pelo modo como estão definidos os sensores a transiçãode corredores não é instantânea?) 
+- [ ] é possível que marsamis fiquem "presos" nos corredores quando se fecham as portas? seja no final da ronda ou por portas fechadas (pelo modo como estão definidos os sensores a transição de corredores não é instantânea?) 
 - [ ] é possível fazer com que a ronda acabe ao encurralar todos os marsamis?
 - [ ] igual para prender todos nos corredores?
 - [ ] há distinção entre o jogo acabar por limite de ruído vs acabar por exaustão?

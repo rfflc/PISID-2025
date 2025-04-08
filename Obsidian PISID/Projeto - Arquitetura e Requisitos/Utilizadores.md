@@ -5,8 +5,8 @@ ver:
 	[[Arquitetura]]
 	[[Formulários HTML]]
 	[[Jogadores]]
-	[[Jogadores Tipo 1]]
-	[[Jogadores Tipo 2]]
+	[[Jogadores Web]]
+	[[Jogadores Android]]
 	[[Requisitos]]
 
 - [[Administrador da Aplicação|administrador de jogo / administrador da aplicação]] (não confundir com administrador da base de dados)
@@ -19,7 +19,7 @@ ver:
 - [[Jogadores|jogador]]
 	- tem a capacidade de observar e interagir com os elementos de jogo mas não tem acesso direto a nenhuma das BDs, ainda que as suas ações possam ter um impacto distanciado
 	- existem dois tipos de jogadores, para efeito de simplicidade neste documento foram identificados como:
-		- [[Jogadores Tipo 1]]
+		- [[Jogadores Web]]
 			- jogadores que participam no jogo através de uma [[HTML|página web]]
-		- [[Jogadores Tipo 2]]
+		- [[Jogadores Android]]
 			- jogadores que participam no jogo através de uma [[Aplicação Android|aplicação Android]]
