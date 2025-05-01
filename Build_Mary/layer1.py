@@ -16,18 +16,21 @@ def load_config(config_path="config.json"):
         sys.exit(1)  
 
 
-# data validation (basic checks only)
+# data validation
 def validate_sound_data(data):  
     """basic validation for sound sensor data"""  
     errors = []  
-    # required fields (no ID check)
+    # required fields  
     for field in ["Player", "Hour", "SoundLevel"]:  
         if field not in data:  
             errors.append(f"missing field: {field}")  
 
-    # basic value checks (Word Doc 1.4)
-    if data.get("SoundLevel", 0) < 0:  
+    # basic value checks
+    sound_level = data.get("SoundLevel", 0)  
+    if sound_level < 0:  
         errors.append("soundLevel cannot be negative")  
+    if sound_level > 30:  
+        errors.append("soundLevel exceeds 30")  
     if data.get("Player", 0) <= 0:  
         errors.append("invalid player ID")  
 
@@ -36,12 +39,12 @@ def validate_sound_data(data):
 def validate_movement_data(data):  
     """basic validation for movement data"""  
     errors = []  
-    # required fields (no ID check)
+    # required fields  
     for field in ["Player", "Marsami", "RoomOrigin", "RoomDestiny", "Status"]:  
         if field not in data:  
             errors.append(f"missing field: {field}")  
 
-    # basic value checks (Word Doc 1.4)
+    # basic value checks  
     if data.get("Status", -1) not in [0, 1, 2]:  
         errors.append("invalid status code")  
     if data.get("RoomOrigin", -1) == data.get("RoomDestiny", -1):  
@@ -50,14 +53,14 @@ def validate_movement_data(data):
     return errors  
 
 
-# mongoDB operations (auto-ID only)
+# mongoDB operations
 class MongoDBHandler:  
     def __init__(self, config):  
         self.client = MongoClient(config["mongodb_uri"])  
         self.db = self.client[config["mongodb_db"]]  
 
     def save_to_mongodb(self, data, collection):  
-        """insert data with auto-generated _id (no custom ID logic)"""  
+        """insert data with auto-generated _id"""  
         data["Migrated"] = False  # flag for migration layer  
         self.db[collection].insert_one(data)  
 
@@ -66,7 +69,7 @@ class MongoDBHandler:
         self.db[f"outliers_{collection}"].insert_one(data)  
 
 
-# MQTT handling (no ID tracking)
+# MQTT handling
 class MQTTClient:  
     def __init__(self, config, mongo_handler):  
         self.client = mqtt.Client()  
