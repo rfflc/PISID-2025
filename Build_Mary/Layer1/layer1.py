@@ -118,15 +118,15 @@ class MQTTClient:
 
     def process_payload(self, data):
         """validate and route data without ID logic"""
-        # fix key names if needed (e.g., "Sound" → "SoundLevel")
+        # normalize key names
         if "Sound" in data:
-            data["SoundLevel"] = data.pop("Sound")
-
-        # determine collection type based on VALIDATED keys
+            data["SoundLevel"] = data.pop("Sound")  # only fix sound key
+        
+        # determine collection type
         if "SoundLevel" in data:
             errors = validate_sound_data(data)
             collection = "soundLevels"
-        elif "Marsami" in data:  # Movement data check
+        elif "Marsami" in data:
             errors = validate_movement_data(data)
             collection = "movements"
         else:
