@@ -89,12 +89,14 @@ class MQTTClient:
     def on_message(self, client, userdata, msg):
         try:
             payload = msg.payload.decode()
-            # fix unquoted keys using regex
-            fixed_payload = re.sub(r'(\w+):', r'"\1":', payload)
-            # extract JSON substring 
-            json_start = fixed_payload.find('{')
-            json_end = fixed_payload.rfind('}') + 1
-            json_str = fixed_payload[json_start:json_end]
+                        # fix unquoted keys using regex  
+            fixed_payload = re.sub(r'(\w+):', r'"\1":', payload)  
+            # insert missing commas between key-value pairs  
+            fixed_payload = re.sub(r'("[^"]+": [^,{]+)(\s+"[^"]+":)', r'\1,\2', fixed_payload)  
+            # extract JSON substring  
+            json_start = fixed_payload.find('{')  
+            json_end = fixed_payload.rfind('}') + 1  
+            json_str = fixed_payload[json_start:json_end]  
             data = json.loads(json_str)
             self.process_payload(data)
         except (json.JSONDecodeError, ValueError) as e:
