@@ -1,0 +1,46 @@
+Para correr:
+
+1. verificar que tudo está instalado e online
+- server prof
+- mqtt
+- mongodb c/ 3 réplicas
+
+2. no diretório onde está o layer1.py, por consola, correr:
+python layer1.py
+
+3. no diretório onde estiver o mazerun.exe, correr:
+mazerun.exe 22 1 0 localhost 1883
+- 22 é o número do grupo
+- 1 é o modo de mensagens (ver abaixo)
+- 0 é o intervalo em segundos entre entradas
+    (0 = streaming contínuo)
+    (streaming é viável)
+- localhost é o broker
+    (atualizar quando mudarmos para 2 máquinas)
+- 1883 é o porto por definição para MQTT
+
+Depois de correr:
+
+4. quando tudo parar na consola do mazerun quer dizer
+    que o jogo terminou para o servidor remoto
+
+5. o layer1.py precisa de ser parado manualmente mas também
+    podemos simplesmente correr outro jogo logo a seguir sem
+    input adicional
+
+6. para parar o layer1.py, na consola onde se está a correr o
+    script, introduzir ctrl + C
+    a partir daí podemos dar novos comandos ou correr uma versão
+    diferente do layer1.py
+
+Message Type:
+
+    0: No messages
+
+    1: All messages (sound + movement)
+
+    2: Movement only
+
+    3: Sound only
+
+    4: Actuator commands only
