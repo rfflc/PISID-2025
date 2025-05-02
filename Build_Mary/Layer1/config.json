@@ -1,7 +1,6 @@
-{
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_topic": "pisid_maze#",
-    "mongodb_uri": "mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0",
-    "mongodb_db": "sensordata"
-}
+{  
+  "mqtt_broker": "localhost",  
+  "mqtt_port": 1883,  
+  "mongodb_uri": "mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0",  
+  "mongodb_db": "sensordata"  
+}  

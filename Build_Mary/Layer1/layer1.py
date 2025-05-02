@@ -46,12 +46,15 @@ def validate_movement_data(data):
             errors.append(f"missing field: {field}")  
 
     # basic value checks  
-    if data.get("Status", -1) not in [0, 1, 2]:  
+    status = data.get("Status", -1)  
+    if status not in [0, 1, 2]:  
         errors.append("invalid status code")  
-    if data.get("RoomOrigin", -1) == data.get("RoomDestiny", -1):  
-        errors.append("roomOrigin and roomDestiny cannot be the same")  
+    elif data.get("RoomOrigin") == data.get("RoomDestiny"):  
+        # only allow same room if status indicates final position  
+        if status != 0 and status != 2:  
+            errors.append("roomOrigin and roomDestiny can only match for status 0/2")  
 
-    return errors  
+    return errors   
 
 
 # mongoDB operations
@@ -87,41 +90,41 @@ class MQTTClient:
         else:  
             print(f"connection failed: {reason_code}") 
 
-    def on_message(self, client, userdata, msg):
-        try:
-            payload = msg.payload.decode()
+    def on_message(self, client, userdata, msg):  
+        try:  
+            payload = msg.payload.decode()  
             
-            # fix unquoted keys only at JSON structure level
-            fixed_payload = re.sub(r'(?<={|,)\s*(\w+):', r'"\1":', payload)
+            # fix unquoted keys only at JSON structure level  
+            fixed_payload = re.sub(r'(?<={|,)\s*(\w+):', r'"\1":', payload)  
             
-            # debug: show intermediate fix
-            print(f"after key fix: {fixed_payload}")  # new debug line
+            # debug: show intermediate fix  
+            print(f"after key fix: {fixed_payload}")  
             
-            # insert missing commas between key-value pairs
-            fixed_payload = re.sub(
-                r'("[^"]+":\s*[^,{]+)(\s*"[^"]+":)', 
-                r'\1,\2', 
-                fixed_payload
-            )
+            # insert missing commas between key-value pairs  
+            fixed_payload = re.sub(  
+                r'("[^"]+":\s*[^,{]+)(\s*"[^"]+":)',  
+                r'\1,\2',  
+                fixed_payload  
+            )  
             
-            # extract JSON substring
-            json_start = fixed_payload.find('{')
-            json_end = fixed_payload.rfind('}') + 1
-            json_str = fixed_payload[json_start:json_end].strip()
-            print(f"attempting to parse: {json_str}")  # debug line
+            # extract JSON substring  
+            json_start = fixed_payload.find('{')  
+            json_end = fixed_payload.rfind('}') + 1  
+            json_str = fixed_payload[json_start:json_end].strip()  
+            print(f"attempting to parse: {json_str}")  
             
-            data = json.loads(json_str)
-            self.process_payload(data)
+            data = json.loads(json_str)  
+            self.process_payload(data)  
             
-        except (json.JSONDecodeError, ValueError) as e:
-            print(f"failed to parse json: {e}")
-            self.mongo.save_outlier({"raw_payload": payload}, "invalid_format")
+        except Exception as e:  # BROAD EXCEPTION HANDLING  
+            print(f"unexpected error: {str(e)}")  
+            self.mongo.save_outlier({"raw_payload": payload}, "invalid_format")  
 
     def process_payload(self, data):
         """validate and route data without ID logic"""
         # normalize key names
-        if "Sound" in data:
-            data["SoundLevel"] = data.pop("Sound")  # only fix sound key
+        if "Sound" in data and "SoundLevel" not in data:  # only rename if SoundLevel doesn't exist
+            data["SoundLevel"] = data.pop("Sound")
         
         # determine collection type
         if "SoundLevel" in data:
