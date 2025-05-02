@@ -87,28 +87,41 @@ class MQTTClient:
 
     def on_message(self, client, userdata, msg):  
         try:  
-            payload = json.loads(msg.payload.decode())  
-            self.process_payload(payload)  
-        except json.JSONDecodeError:  
-            print("invalid JSON payload")  
+            payload = msg.payload.decode()  
+            # extract JSON substring (assumes JSON is between { and })  
+            json_start = payload.find('{')  
+            json_end = payload.rfind('}') + 1  
+            json_str = payload[json_start:json_end]  
+            data = json.loads(json_str)  
+            self.process_payload(data)  
+        except (json.JSONDecodeError, ValueError) as e:  
+            print(f"Failed to parse JSON: {e}")  
+            self.mongo.save_outlier({"raw_payload": payload}, "invalid_format")   
 
-    def process_payload(self, data):  
-        """validate and route data without ID logic"""  
-        # determine collection type  
-        if "SoundLevel" in data:  
-            errors = validate_sound_data(data)  
-            collection = "soundLevels"  
-        else:  
-            errors = validate_movement_data(data)  
-            collection = "movements"  
+    def process_payload(self, data):
+        """validate and route data without ID logic"""
+        # fix key names if needed (e.g., "Sound" → "SoundLevel")
+        if "Sound" in data:
+            data["SoundLevel"] = data.pop("Sound")
 
-        # act on validation results  
-        if errors:  
-            print(f"invalid data: {', '.join(errors)}")  
-            self.mongo.save_outlier(data, collection)  
-        else:  
-            self.mongo.save_to_mongodb(data, collection)  
-            print(f"inserted into {collection}")  
+        # determine collection type based on VALIDATED keys
+        if "SoundLevel" in data:
+            errors = validate_sound_data(data)
+            collection = "soundLevels"
+        elif "Marsami" in data:  # Movement data check
+            errors = validate_movement_data(data)
+            collection = "movements"
+        else:
+            errors = ["Unknown data format"]
+            collection = "invalid_format"
+
+        # act on validation results
+        if errors:
+            print(f"invalid data: {', '.join(errors)}")
+            self.mongo.save_outlier(data, collection)
+        else:
+            self.mongo.save_to_mongodb(data, collection)
+            print(f"inserted into {collection}")
 
 
 # main execution  
