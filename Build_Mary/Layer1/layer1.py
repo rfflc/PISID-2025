@@ -73,18 +73,19 @@ class MongoDBHandler:
 # MQTT handling
 class MQTTClient:  
     def __init__(self, config, mongo_handler):  
-        self.client = mqtt.Client()  
+        self.client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)  # fix API version
         self.config = config  
         self.mongo = mongo_handler  
         self.client.on_connect = self.on_connect  
         self.client.on_message = self.on_message  
 
-    def on_connect(self, client, userdata, flags, rc):  
-        if rc == 0:  
-            print(f"connected to MQTT broker: {self.config['mqtt_broker']}")  
-            self.client.subscribe(self.config["mqtt_topic"])  
+    def on_connect(self, client, userdata, flags, reason_code, properties):  # updated signature
+        if reason_code == 0:  
+            print(f"connected to MQTT broker")  
+            client.subscribe("pisid_mazemov_22")  
+            client.subscribe("pisid_mazesound_22")  
         else:  
-            print(f"connection failed with code: {rc}")  
+            print(f"connection failed: {reason_code}") 
 
     def on_message(self, client, userdata, msg):
         try:
