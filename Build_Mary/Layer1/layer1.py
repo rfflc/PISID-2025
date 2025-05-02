@@ -3,6 +3,7 @@ import json
 import sys  
 from pymongo import MongoClient  
 import paho.mqtt.client as mqtt  
+import re
 
 
 # configuration
@@ -85,18 +86,20 @@ class MQTTClient:
         else:  
             print(f"connection failed with code: {rc}")  
 
-    def on_message(self, client, userdata, msg):  
-        try:  
-            payload = msg.payload.decode()  
-            # extract JSON substring (assumes JSON is between { and })  
-            json_start = payload.find('{')  
-            json_end = payload.rfind('}') + 1  
-            json_str = payload[json_start:json_end]  
-            data = json.loads(json_str)  
-            self.process_payload(data)  
-        except (json.JSONDecodeError, ValueError) as e:  
-            print(f"Failed to parse JSON: {e}")  
-            self.mongo.save_outlier({"raw_payload": payload}, "invalid_format")   
+    def on_message(self, client, userdata, msg):
+        try:
+            payload = msg.payload.decode()
+            # fix unquoted keys using regex
+            fixed_payload = re.sub(r'(\w+):', r'"\1":', payload)
+            # extract JSON substring 
+            json_start = fixed_payload.find('{')
+            json_end = fixed_payload.rfind('}') + 1
+            json_str = fixed_payload[json_start:json_end]
+            data = json.loads(json_str)
+            self.process_payload(data)
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"failed to parse json: {e}")
+            self.mongo.save_outlier({"raw_payload": payload}, "invalid_format")
 
     def process_payload(self, data):
         """validate and route data without ID logic"""
