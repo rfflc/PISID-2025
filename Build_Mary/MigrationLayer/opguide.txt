@@ -1,4 +1,4 @@
-Para testar:
+Para testar apenas este script:
 
 1. verificar que tudo está instalado e online
 - mqtt
@@ -10,7 +10,20 @@ Para testar:
     qur tenham o campo/flag 'migrated' a falso)
 
 3. abrir janela de CMD e usar o comando:
-    mosquitto_sub -v -h broker.emqx.io -t "pisid_mazesound_22" -t "pisid_mazemov_22"
+    mosquitto_sub -v -h localhost -t "pisid_mazesound_22" -t "pisid_mazemov_22"  
 
 4. no diretório onde está o mongo_to_mqtt.py, por consola, correr:
     python mongo_to_mqtt.py
+
+Depois de testar (para dar reset aos dados de teste):
+
+5. abrir janela de CMD e usar os comandos:
+    mongosh --port 27017  
+    use sensordata  
+    db.movements.updateMany({ Migrated: true }, { $set: { Migrated: false }});
+    db.soundLevels.updateMany({ Migrated: true }, { $set: { Migrated: false }});
+
+6. para confirmar, abrir / dar refresh no compass ou usar o comando:
+    db.soundLevels.findOne({ Migrated: false });
+    (masoquismo, usem o compass, até podem deixar aberto,
+    é só dar refresh depois do teste / depois de dar reset)

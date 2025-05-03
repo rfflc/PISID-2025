@@ -7,7 +7,7 @@ from datetime import datetime
 # configuration  
 MONGO_URI = "mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0"  
 MONGO_DB = "sensordata"  
-MQTT_BROKER = "broker.emqx.io"  
+MQTT_BROKER = "localhost" # ffs  
 MQTT_PORT = 1883  
 
 def get_mongo_collections():  
@@ -32,22 +32,22 @@ def migrate():
     while True:  
         # process sound data  
         for doc in collections["sound"].find({"Migrated": False}):  
-            try:
-                hour_str = doc["Hour"]  
-                hour_obj = datetime.strptime(hour_str, "%Y-%m-%d %H:%M:%S.%f")  
+            try:  
                 payload = {  
                     "Player": doc["Player"],  
-                    "Hour": hour_obj.isoformat(),  
+                    "Hour": doc["Hour"],  # send raw string  
                     "Sound": doc["SoundLevel"]  
                 }  
                 publish_to_mqtt(mqtt_client, "sound", payload)  
-                collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})
-            except Exception as e:
-                print(f"Error processing sound doc {doc['_id']}: {str(e)}")
+                collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
+            except Exception as e:  
+                print(f"SOUND ERROR: {str(e)}")  
+                # mark as migrated to avoid reprocessing  
+                collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
 
         # process movement data  
         for doc in collections["movement"].find({"Migrated": False}):  
-            try:
+            try:  
                 payload = {  
                     "Player": doc["Player"],  
                     "Marsami": doc["Marsami"],  
@@ -56,11 +56,12 @@ def migrate():
                     "Status": doc["Status"]  
                 }  
                 publish_to_mqtt(mqtt_client, "mov", payload)  
-                collections["movement"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})
-            except Exception as e:
-                print(f"Error processing movement doc {doc['_id']}: {str(e)}")
+                collections["movement"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
+            except Exception as e:  
+                print(f"MOVEMENT ERROR: {str(e)}")  
+                collections["movement"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
 
-        time.sleep(5)  
+        time.sleep(1)  
 
 if __name__ == "__main__":  
     migrate()  
