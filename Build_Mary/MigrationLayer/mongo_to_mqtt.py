@@ -19,9 +19,10 @@ def get_mongo_collections():
     }  
 
 def publish_to_mqtt(client, topic_suffix, payload):  
-    topic = f"pisid_maze{topic_suffix}"  
-    client.publish(topic, payload)  
-    print(f"published to {topic}: {payload}")  
+    player_id = payload["Player"]  
+    topic = f"pisid_maze{topic_suffix}_{player_id}"  # Fixed topic format
+    client.publish(topic, str(payload))  
+    print(f"Published to {topic}: {payload}")  
 
 def migrate():  
     mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)  
@@ -31,29 +32,35 @@ def migrate():
     while True:  
         # process sound data  
         for doc in collections["sound"].find({"Migrated": False}):  
-            hour_str = doc["Hour"]  
-            hour_obj = datetime.strptime(hour_str, "%Y-%m-%d %H:%M:%S.%f")  # Adjust format to match your data  
-            payload = {  
-                "Player": doc["Player"],  
-                "Hour": hour_obj.isoformat(),  
-                "Sound": doc["SoundLevel"]  
-            }   
-            publish_to_mqtt(mqtt_client, "sound", str(payload))  
-            collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
+            try:
+                hour_str = doc["Hour"]  
+                hour_obj = datetime.strptime(hour_str, "%Y-%m-%d %H:%M:%S.%f")  
+                payload = {  
+                    "Player": doc["Player"],  
+                    "Hour": hour_obj.isoformat(),  
+                    "Sound": doc["SoundLevel"]  
+                }  
+                publish_to_mqtt(mqtt_client, "sound", payload)  
+                collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})
+            except Exception as e:
+                print(f"Error processing sound doc {doc['_id']}: {str(e)}")
 
         # process movement data  
         for doc in collections["movement"].find({"Migrated": False}):  
-            payload = {  
-                "Player": doc["Player"],  
-                "Marsami": doc["Marsami"],  
-                "RoomOrigin": doc["RoomOrigin"],  
-                "RoomDestiny": doc["RoomDestiny"],  
-                "Status": doc["Status"]  
-            }  
-            publish_to_mqtt(mqtt_client, "mov", str(payload))  
-            collections["movement"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
+            try:
+                payload = {  
+                    "Player": doc["Player"],  
+                    "Marsami": doc["Marsami"],  
+                    "RoomOrigin": doc["RoomOrigin"],  
+                    "RoomDestiny": doc["RoomDestiny"],  
+                    "Status": doc["Status"]  
+                }  
+                publish_to_mqtt(mqtt_client, "mov", payload)  
+                collections["movement"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})
+            except Exception as e:
+                print(f"Error processing movement doc {doc['_id']}: {str(e)}")
 
-        time.sleep(5)  # poll every 5 seconds  
+        time.sleep(5)  
 
 if __name__ == "__main__":  
     migrate()  
