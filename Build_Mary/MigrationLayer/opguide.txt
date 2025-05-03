@@ -1,0 +1,16 @@
+Para testar:
+
+1. verificar que tudo está instalado e online
+- mqtt
+- mosquitto
+- mongodb c/ 3 réplicas
+
+2. abrir compass e verificar que há dados para migrar
+    (i.e., que há dados nas coleções movements e/ou soundLevels
+    qur tenham o campo/flag 'migrated' a falso)
+
+3. abrir janela de CMD e usar o comando:
+    mosquitto_sub -v -h broker.emqx.io -t "pisid_mazesound_22" -t "pisid_mazemov_22"
+
+4. no diretório onde está o mongo_to_mqtt.py, por consola, correr:
+    python mongo_to_mqtt.py
