@@ -31,11 +31,13 @@ def migrate():
     while True:  
         # process sound data  
         for doc in collections["sound"].find({"Migrated": False}):  
+            hour_str = doc["Hour"]  
+            hour_obj = datetime.strptime(hour_str, "%Y-%m-%d %H:%M:%S.%f")  # Adjust format to match your data  
             payload = {  
                 "Player": doc["Player"],  
-                "Hour": doc["Hour"].isoformat(),  
+                "Hour": hour_obj.isoformat(),  
                 "Sound": doc["SoundLevel"]  
-            }  
+            }   
             publish_to_mqtt(mqtt_client, "sound", str(payload))  
             collections["sound"].update_one({"_id": doc["_id"]}, {"$set": {"Migrated": True}})  
 
