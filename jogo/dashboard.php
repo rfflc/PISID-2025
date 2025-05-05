@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Create new game
         $description = $_POST['description'];
         $user_id = $_SESSION['user_id'];
-        $stmt = $conn->prepare("INSERT INTO jogo (IdUtilizador, descricao, estado) VALUES (?, ?, 'por iniciar')");
+        $stmt = $conn->prepare("INSERT INTO jogo (IdUtilizador, descricao, estado) VALUES (?, ?, 'por_iniciar')");
         $stmt->bind_param("is", $user_id, $description);
         $stmt->execute();
         $stmt->close();
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST['delete_game'])) {
         // Delete game
         $game_id = $_POST['game_id'];
-        $stmt = $conn->prepare("DELETE FROM jogo WHERE idJogo = ? AND IdUtilizador = ? AND estado = 'por iniciar'");
+        $stmt = $conn->prepare("DELETE FROM jogo WHERE idJogo = ? AND IdUtilizador = ? AND estado = 'por_iniciar'");
         $stmt->bind_param("ii", $game_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->close();
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST['start_game'])) {
         // Start game
         $game_id = $_POST['game_id'];
-        $stmt = $conn->prepare("UPDATE jogo SET estado = 'a correr', inicio = NOW() WHERE idJogo = ? AND IdUtilizador = ? AND estado = 'por iniciar'");
+        $stmt = $conn->prepare("UPDATE jogo SET estado = 'ativo', inicio = NOW() WHERE idJogo = ? AND IdUtilizador = ? AND estado = 'por_iniciar'");
         $stmt->bind_param("ii", $game_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->close();
@@ -300,7 +300,7 @@ $result = $stmt->get_result();
             const startBtn = form.querySelector('[name="start_game"]');
             const deleteBtn = form.querySelector('[name="delete_game"]');
 
-            if (game.estado === 'por iniciar') {
+            if (game.estado === 'por_iniciar') {
                 updateBtn.style.display = 'block';
                 startBtn.style.display = 'block';
                 deleteBtn.style.display = 'block';
