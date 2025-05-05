@@ -10,13 +10,25 @@ DROP TRIGGER IF EXISTS tr_Sound_AfterInsert_RemoveDuplicate;
 -- -----------------------------------------------------  
 -- tables  
 -- -----------------------------------------------------  
-CREATE TABLE IF NOT EXISTS jogo (  
-    id_jogo INT AUTO_INCREMENT PRIMARY KEY,  
-    descricao VARCHAR(255),  
-    inicio DATETIME,  
-    fim DATETIME,  
-    estado ENUM('ativo', 'inativo') DEFAULT 'ativo'  
-);  
+CREATE TABLE utilizador (
+        idUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(50) NOT NULL,
+        grupo VARCHAR(50) NOT NULL,
+        telemovel VARCHAR(12) NOT NULL,
+        tipo VARCHAR(10) NOT NULL,
+        email VARCHAR(100) NOT NULL
+);
+CREATE TABLE jogo (
+        idJogo INT PRIMARY KEY AUTO_INCREMENT,
+        idUtilizador INT NOT NULL,
+    descricao TEXT NOT NULL,
+        inicio TIMESTAMP NULL DEFAULT NULL,
+        fim TIMESTAMP NULL DEFAULT NULL,
+        estado VARCHAR(20) NOT NULL CHECK (
+            estado IN ('por iniciar', 'a correr', 'terminado')),
+        FOREIGN KEY (idUtilizador) REFERENCES utilizador(idUtilizador)
+);
+
 
 CREATE TABLE IF NOT EXISTS setupMaze (  
     id_setup INT AUTO_INCREMENT PRIMARY KEY,  
