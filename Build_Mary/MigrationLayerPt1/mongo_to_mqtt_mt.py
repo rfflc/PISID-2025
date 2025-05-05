@@ -34,7 +34,7 @@ def publish_to_mqtt(client, topic_suffix, payload):
 
 # thread 1 - sound processing  
 def sound_worker():  
-    mqtt_client = mqtt.Client()  
+    mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)  
     mqtt_client.connect(config["mqtt_broker"], config["mqtt_port"])  
     sound_col = get_mongo_collections()["sound"]  
     
@@ -61,7 +61,7 @@ def sound_worker():
 
 # thread 2 - movement processing  
 def movement_worker():  
-    mqtt_client = mqtt.Client()  
+    mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)  
     mqtt_client.connect(config["mqtt_broker"], config["mqtt_port"])  
     mov_col = get_mongo_collections()["movement"]  
     
