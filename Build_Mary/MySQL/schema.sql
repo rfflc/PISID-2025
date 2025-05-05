@@ -25,7 +25,7 @@ CREATE TABLE jogo (
         inicio TIMESTAMP NULL DEFAULT NULL,
         fim TIMESTAMP NULL DEFAULT NULL,
         estado VARCHAR(20) NOT NULL CHECK (
-            estado IN ('por iniciar', 'a correr', 'terminado')),
+            estado IN ('por_iniciar', 'ativo', 'terminado')),
         FOREIGN KEY (idUtilizador) REFERENCES utilizador(idUtilizador)
 );
 
