@@ -1,100 +1,32 @@
 import paho.mqtt.client as mqtt
 import subprocess
 import mysql.connector
-import sqlite3
 import time
 import sys
+import os
+from dotenv import load_dotenv
 
-from mysql.connector import Error
+load_dotenv()
 
-# Argumentos da linha de comando
-if len(sys.argv) < 3:
-    print("Uso: python script.py <numero_grupo> <id_jogador>")
-    sys.exit(1)
-
-numero_grupo = sys.argv[1]
-id_jogador = sys.argv[2]
-
-# CONFIGURAÇÕES
-MQTT_BROKER = "localhost"
-MQTT_PORT = 1883
-MQTT_TOPIC = "jogo/sensores"
-DB_PATH = "jogo.db"
-GAME_EXECUTABLE = "./meu_jogo_runable"
-
-# DB externas
 DB_MAZE_CONFIG = {
-    'host': '194.210.86.10',
-    'port': 3306,
-    'user': 'usuario_maze',
-    'password': 'senha_maze',
-    'database': 'maze'
+    'host': os.getenv('DB_CLOUD_HOST'),
+    'port': int(os.getenv('DB_CLOUD_PORT', 3306)),
+    'user': os.getenv('DB_CLOUD_USER'),
+    'password': os.getenv('DB_CLOUD_PASSWORD'),
+    'database': os.getenv('DB_CLOUD_NAME')
 }
 
 DB_PISID_CONFIG = {
-    'host': '12.0.0.1',
-    'port': 3306,
-    'user': 'usuario_pisid',
-    'password': 'senha_pisid',
-    'database': 'pisid'
+    'host': os.getenv('DB_LOCAL_HOST'),
+    'port': int(os.getenv('DB_LOCAL_PORT', 3306)),
+    'user': os.getenv('DB_LOCAL_USER'),
+    'password': os.getenv('DB_LOCAL_PASSWORD'),
+    'database': os.getenv('DB_LOCAL_NAME')
 }
 
-
-# FUNÇÃO PARA INICIAR MQTT
-def iniciar_mqtt():
-    def on_connect(client, userdata, flags, rc):
-        print(f"Conectado ao MQTT com código {rc}")
-        client.subscribe(MQTT_TOPIC)
-
-    def on_message(client, userdata, msg):
-        print(f"Mensagem recebida: {msg.topic} {msg.payload.decode()}")
-
-    client = mqtt.Client()
-    client.on_connect = on_connect
-    client.on_message = on_message
-    client.connect(MQTT_BROKER, MQTT_PORT, 60)
-    client.loop_start()
-    return client
-
-
-# FUNÇÃO PARA INICIAR O JOGO
-def iniciar_jogo():
-    print("Iniciando jogo...")
-    subprocess.Popen([GAME_EXECUTABLE])
-    time.sleep(5)
-
-
-# FUNÇÃO PARA CONECTAR À BASE DE DADOS LOCAL
-def conectar_banco_local():
-    print("Conectando ao banco de dados local...")
-    conn = sqlite3.connect(DB_PATH)
-    return conn
-
-
-# FUNÇÃO PARA LER VALORES DO JOGO
-def verificar_valores_jogo(conn):
-    cursor = conn.cursor()
-    cursor.execute("SELECT ruido, localizacao FROM jogo_estados ORDER BY id DESC LIMIT 1")
-    resultado = cursor.fetchone()
-    if resultado:
-        ruido, localizacao = resultado
-        print(f"Nível de Ruído: {ruido}, Localização de Marsamis: {localizacao}")
-        return ruido, localizacao
-    return None, None
-
-
-# ATUADORES
-def usar_actuadores(ruido, localizacao):
-    if ruido > 80:
-        print("Atuador: Reduzindo volume...")
-    if localizacao == "zona_insegura":
-        print("Atuador: Ativando alerta!")
-
-
-# FUNÇÃO PARA COPIAR DADOS DE maze PARA pisid
 def copiar_setupmaze(iDJogo):
     try:
-        print("Ligando ao banco maze...")
+        print("A conectar à DB para copiar mazesetup....")
         maze_conn = mysql.connector.connect(**DB_MAZE_CONFIG)
         pisid_conn = mysql.connector.connect(**DB_PISID_CONFIG)
 
@@ -105,7 +37,7 @@ def copiar_setupmaze(iDJogo):
         dados = maze_cursor.fetchone()
 
         if not dados:
-            print("Nenhum dado encontrado na base maze.")
+            print("Nenhum dado encontrado na db maze.")
             return
 
         campos = ['normalnoise', 'numberrooms', 'numberplayers', 'frozentime',
@@ -122,7 +54,7 @@ def copiar_setupmaze(iDJogo):
         pisid_cursor.execute(insert_query, valores)
         pisid_conn.commit()
 
-        print("Dados inseridos na base pisid com sucesso.")
+        print("Dados inseridos na db pisid com sucesso.")
 
     except Error as e:
         print(f"Erro ao copiar dados: {e}")
@@ -134,26 +66,12 @@ def copiar_setupmaze(iDJogo):
             pisid_cursor.close()
             pisid_conn.close()
 
-
 # FUNÇÃO PRINCIPAL
 def main():
-    mqtt_client = iniciar_mqtt()
-    iniciar_jogo()
-    conn_local = conectar_banco_local()
+    load_dotenv()
+    copiar_setupmaze(1)
 
-    copiar_setupmaze(id_jogador)
 
-    try:
-        while True:
-            ruido, localizacao = verificar_valores_jogo(conn_local)
-            if ruido is not None and localizacao is not None:
-                usar_actuadores(ruido, localizacao)
-            time.sleep(10)
-    except KeyboardInterrupt:
-        print("Encerrando...")
-    finally:
-        conn_local.close()
-        mqtt_client.loop_stop()
 
 
 if __name__ == "__main__":
