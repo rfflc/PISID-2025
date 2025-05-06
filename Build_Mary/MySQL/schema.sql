@@ -32,7 +32,7 @@ CREATE TABLE utilizador (
 ) ENGINE=InnoDB;
 
 CREATE TABLE jogo (
-    idJogo INT PRIMARY KEY AUTO_INCREMENT,
+    iDJogo INT PRIMARY KEY AUTO_INCREMENT,
     iDUtilizador INT NOT NULL,
     descricao TEXT NOT NULL,
     inicio TIMESTAMP NULL DEFAULT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE jogo (
 
 CREATE TABLE IF NOT EXISTS setupMaze (  
     id_setup INT AUTO_INCREMENT PRIMARY KEY,  
-    idJogo INT NOT NULL,  
+    iDJogo INT NOT NULL,  
     limiteRuido FLOAT DEFAULT 21.5,  
-    FOREIGN KEY (idJogo) REFERENCES jogo(idJogo)  
+    FOREIGN KEY (iDJogo) REFERENCES jogo(iDJogo)  
 ) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS corridor (  
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS corridor (
     Distance INT NOT NULL,  
     status ENUM('open', 'closed') DEFAULT 'open',  
     iDJogo INT NOT NULL,  
-    FOREIGN KEY (iDJogo) REFERENCES jogo(idJogo)  
+    FOREIGN KEY (iDJogo) REFERENCES jogo(iDJogo)  
 ) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS sound (  
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS sound (
     hour DATETIME NOT NULL,  
     soundLevel FLOAT NOT NULL,  
     iDJogo INT NOT NULL,  
-    FOREIGN KEY (iDJogo) REFERENCES jogo(idJogo)  
+    FOREIGN KEY (iDJogo) REFERENCES jogo(iDJogo)  
 ) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS medicoesPassagens (  
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS medicoesPassagens (
     roomDestiny INT NOT NULL,  
     status INT NOT NULL CHECK (status IN (0, 1, 2)),  
     iDJogo INT NOT NULL,  
-    FOREIGN KEY (iDJogo) REFERENCES jogo(idJogo)  
+    FOREIGN KEY (iDJogo) REFERENCES jogo(iDJogo)  
 ) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS ocupacaoLabirinto (  
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS ocupacaoLabirinto (
     even INT DEFAULT 0,  
     iDJogo INT NOT NULL,  
     PRIMARY KEY (sala, iDJogo),  
-    FOREIGN KEY (iDJogo) REFERENCES jogo(idJogo)  
+    FOREIGN KEY (iDJogo) REFERENCES jogo(iDJogo)  
 ) ENGINE=InnoDB;  
 
 -- -----------------------------------------------------  
@@ -187,7 +187,7 @@ BEGIN
     SELECT limiteRuido INTO v_limiteRuido FROM setupMaze WHERE iDJogo = NEW.iDJogo;  
     IF NEW.soundLevel > v_limiteRuido THEN  
         UPDATE corridor SET status = 'closed' WHERE iDJogo = NEW.iDJogo;  
-        UPDATE jogo SET estado = 'terminado' WHERE idJogo = NEW.iDJogo;  -- Changed to idJogo
+        UPDATE jogo SET estado = 'terminado' WHERE iDJogo = NEW.iDJogo;  -- Changed to iDJogo
     END IF;  
 END$$  
 
