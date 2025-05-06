@@ -120,7 +120,7 @@
                     throw new Exception("Conexão falhou com o erro: " . $conn->connect_error);
                 }
 
-                $stmt = $conn->prepare("SELECT idUtilizador, nome, grupo FROM utilizador WHERE nome = ? AND grupo = ?");
+                $stmt = $conn->prepare("SELECT utilizador_id, nome, grupo FROM utilizador WHERE nome = ? AND grupo = ?");
                 $stmt->bind_param("si", $username, $group);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -128,7 +128,7 @@
                 if ($result->num_rows > 0) {
                     $user = $result->fetch_assoc();
                     session_start();
-                    $_SESSION['user_id'] = $user['idUtilizador'];
+                    $_SESSION['user_id'] = $user['utilizador_id'];
                     $_SESSION['username'] = $user['nome'];
                     $_SESSION['group'] = $user['grupo'];
                     $_SESSION['server_ip'] = $server_ip;
