@@ -1,4 +1,4 @@
-# mqtt_to_mysql.py
+# mqtt_to_sql.py
 import json
 import pymysql
 import paho.mqtt.client as mqtt
@@ -15,58 +15,111 @@ def load_config(config_path="config.json"):
 
 config = load_config()
 
-# mysql connection
+# SQL connection
 def get_mysql_conn():
     return pymysql.connect(
         host="localhost",
         user="root",
-        password="",
+        password="pisid",
         database="maze",
         cursorclass=pymysql.cursors.DictCursor
     )
 
-# mqtt handlers
+# json parsing
+def safe_json_parse(raw):
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        # Try fixing common issues
+        fixed = raw.replace("'", '"').replace("True", "true").replace("False", "false")
+        return json.loads(fixed)
+
 def on_connect(client, userdata, flags, reason_code, properties):
-    print(f"Connected to MQTT with code {reason_code}")
+    print(f"Connected with code {reason_code}")
     client.subscribe("pisid_mazesound_22")
     client.subscribe("pisid_mazemov_22")
 
-def on_message(client, userdata, msg):
+def on_message(client, userdata, message):
+    raw_payload = message.payload.decode()
+    conn = None
     try:
-        payload = json.loads(msg.payload.decode())
-        print(f"Received: {payload}")
+        # json handling
+        payload = safe_json_parse(raw_payload)
         
+        # validate payload
+        required_fields = {
+            'sound': ["Player", "Hour", "Sound"],
+            'movement': ["Player", "Marsami", "RoomOrigin", "RoomDestiny", "Status"]
+        }
+        
+        payload_type = 'sound' if 'Sound' in payload else 'movement' if 'Marsami' in payload else None
+        if not payload_type:
+            raise ValueError("Unknown payload type")
+            
+        missing = [f for f in required_fields[payload_type] if f not in payload]
+        if missing:
+            raise ValueError(f"Missing fields: {missing}")
+
+        # Database operations
         conn = get_mysql_conn()
         with conn.cursor() as cursor:
-            if "Sound" in payload:  # sound data
+            if payload_type == 'sound':
                 cursor.callproc("sp_MigrateSound", [
-                    f"{datetime.now().timestamp()}",  # generate unique ID
+                    f"{datetime.now().timestamp()}",
                     payload["Player"],
                     payload["Hour"],
                     payload["Sound"],
-                    1  # jogo_id (replace with actual game ID)
+                    1  # jogo_id - verify this exists!
                 ])
-            elif "Marsami" in payload:  # movement data
+            else:
                 cursor.callproc("sp_MigrateMovements", [
-                    f"{datetime.now().timestamp()}",  # generate unique ID
+                    f"{datetime.now().timestamp()}",
                     payload["Player"],
                     payload["Marsami"],
                     payload["RoomOrigin"],
                     payload["RoomDestiny"],
                     payload["Status"],
-                    1  # jogo_id (replace with actual game ID)
+                    1  # jogo_id
                 ])
             conn.commit()
+        print(f"Processed {payload_type} payload")
+
     except Exception as e:
         print(f"ERROR: {str(e)}")
-    finally:
-        conn.close()
+        try:
+            conn = get_mysql_conn()
+            with conn.cursor() as cursor:
+                error_data = {
+                    'raw_payload': raw_payload,
+                    'error': str(e)
+                }
+                
+                if 'Sound' in raw_payload:
+                    cursor.execute("""
+                        INSERT INTO advanced_outliers_sound 
+                        (player_id, sound_level, hour, error_reason)
+                        VALUES (%(Player)s, %(Sound)s, %(Hour)s, %(error)s)
+                    """, {**payload, **error_data})
+                else:
+                    cursor.execute("""
+                        INSERT INTO advanced_outliers_movements 
+                        (marsami_id, room_origin, room_destiny, status, error_reason)
+                        VALUES (%(Marsami)s, %(RoomOrigin)s, %(RoomDestiny)s, %(Status)s, %(error)s)
+                    """, {**payload, **error_data})
+                conn.commit()
+        except Exception as db_error:
+            print(f"DB ERROR: {db_error}")
+        finally:
+            if conn:
+                conn.close()
 
-# main
 if __name__ == "__main__":
-    client = mqtt.Client()
+    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
     client.on_connect = on_connect
     client.on_message = on_message
     
-    client.connect(config["mqtt_broker"], config["mqtt_port"])
-    client.loop_forever()
+    try:
+        client.connect(config["mqtt_broker"], config["mqtt_port"])
+        client.loop_forever()
+    except KeyboardInterrupt:
+        print("\nStopped by user")
