@@ -7,128 +7,85 @@ DROP PROCEDURE IF EXISTS sp_UpdateRoomOccupancy;
 DROP TRIGGER IF EXISTS tr_FecharPortas_SeRuidoExceder;  
 DROP TRIGGER IF EXISTS tr_Sound_AfterInsert_RemoveDuplicate;  
 
-
--- -----------------------------------------------------  
--- cleanup existing tables  
--- ----------------------------------------------------- 
-DROP TABLE IF EXISTS utilizador;
-DROP TABLE IF EXISTS jogo;
-DROP TABLE IF EXISTS setupmaze;
-DROP TABLE IF EXISTS corridor;
-DROP TABLE IF EXISTS sound;
-DROP TABLE IF EXISTS medicoesPassagens;
-DROP TABLE IF EXISTS ocupaçãoLabirinto;
-DROP TABLE IF EXISTS marsamis;
-DROP TABLE IF EXISTS localizacaoMarsami;
-DROP TABLE IF EXISTS mensagens;
+-- drop tables in reverse dependency order  
+DROP TABLE IF EXISTS advanced_outliers_movements;  
+DROP TABLE IF EXISTS advanced_outliers_sound;  
+DROP TABLE IF EXISTS invalid_format_errors;  
+DROP TABLE IF EXISTS ocupacaoLabirinto;  
+DROP TABLE IF EXISTS medicoesPassagens;  
+DROP TABLE IF EXISTS sound;  
+DROP TABLE IF EXISTS corridor;  
+DROP TABLE IF EXISTS setupMaze;  
+DROP TABLE IF EXISTS jogo;  
+DROP TABLE IF EXISTS utilizador;  
 
 -- -----------------------------------------------------  
 -- tables  
 -- -----------------------------------------------------  
 CREATE TABLE utilizador (
-        utilizador_id INT PRIMARY KEY AUTO_INCREMENT,
-        nome VARCHAR(50) NOT NULL,
-        grupo VARCHAR(50) NOT NULL,
-        telemovel VARCHAR(12) NOT NULL,
-        tipo VARCHAR(10) NOT NULL,
-        email VARCHAR(100) NOT NULL
-);
+    idUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    grupo VARCHAR(50) NOT NULL,
+    telemovel VARCHAR(12) NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    email VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
 CREATE TABLE jogo (
-        IDJogo INT PRIMARY KEY AUTO_INCREMENT,
-        utilizador_id INT NOT NULL,
-        descricao TEXT NOT NULL,
-        inicio TIMESTAMP NULL DEFAULT NULL,
-        fim TIMESTAMP NULL DEFAULT NULL,
-        estado VARCHAR(20) NOT NULL CHECK (
-            estado IN ('por_iniciar', 'ativo', 'terminado')),
-        FOREIGN KEY (utilizador_id) REFERENCES utilizador(utilizador_id) ON DELETE CASCADE
-);
+    idJogo INT PRIMARY KEY AUTO_INCREMENT,
+    idUtilizador INT NOT NULL,
+    descricao TEXT NOT NULL,
+    inicio TIMESTAMP NULL DEFAULT NULL,
+    fim TIMESTAMP NULL DEFAULT NULL,
+    estado VARCHAR(20) NOT NULL CHECK (
+        estado IN ('por_iniciar', 'ativo', 'terminado')),
+    FOREIGN KEY (idUtilizador) REFERENCES utilizador(idUtilizador)
+) ENGINE=InnoDB;
 
-
-CREATE TABLE IF NOT EXISTS setupmaze (  
+CREATE TABLE IF NOT EXISTS setupMaze (  
     id_setup INT AUTO_INCREMENT PRIMARY KEY,  
-    IDJogo INT NOT NULL,
-    normalnoise DECIMAL NOT NULL,
-    numberrooms INT NOT NULL,
-    numbermarsamis INT NOT NULL,
-    numberplayers INT NOT NULL,
-    frozentime INT NOT NULL,
-    delaytime INT NOT NULL,
-    timemarsamilive INT NOT NULL,
-    noisevartoleration DECIMAL NOT NULL,
-    step INT NOT NULL,
-    minutesstep DECIMAL,
-    minutessilence DECIMAL,
-    randomsound DECIMAL NOT NULL,
-    randommove INT NOT NULL,
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);  
+    jogo_id INT NOT NULL,  
+    limiteRuido FLOAT DEFAULT 21.5,  
+    FOREIGN KEY (jogo_id) REFERENCES jogo(idJogo)  
+) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS corridor (  
     id_corredor INT AUTO_INCREMENT PRIMARY KEY,  
     salaA INT NOT NULL,  
     salaB INT NOT NULL,  
     status ENUM('open', 'closed') DEFAULT 'open',  
-    IDJogo INT NOT NULL,  
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);  
+    jogo_id INT NOT NULL,  
+    FOREIGN KEY (jogo_id) REFERENCES jogo(idJogo)  
+) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS sound (  
-    IDSound INT AUTO_INCREMENT PRIMARY KEY,    
-    Hour DATETIME NOT NULL,  
-    Sound FLOAT NOT NULL,  
-    IDJogo INT NOT NULL,  
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE  
-);  
+    id_sound VARCHAR(255) PRIMARY KEY,  
+    player INT NOT NULL,  
+    hour DATETIME NOT NULL,  
+    soundLevel FLOAT NOT NULL,  
+    jogo_id INT NOT NULL,  
+    FOREIGN KEY (jogo_id) REFERENCES jogo(idJogo)  
+) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS medicoesPassagens (  
-    id_medicao INT AUTO_INCREMENT PRIMARY KEY,  
+    id_medicao VARCHAR(255) PRIMARY KEY,  
     player INT NOT NULL,  
     marsami INT NOT NULL,  
     roomOrigin INT NOT NULL,  
     roomDestiny INT NOT NULL,  
     status INT NOT NULL CHECK (status IN (0, 1, 2)),  
-    IDJogo INT NOT NULL,  
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);  
+    jogo_id INT NOT NULL,  
+    FOREIGN KEY (jogo_id) REFERENCES jogo(idJogo)  
+) ENGINE=InnoDB;  
 
-CREATE TABLE IF NOT EXISTS ocupaçãoLabirinto (  
-    Sala INT NOT NULL,  
-    NumeroMarsamisOdd INT DEFAULT 0,  
-    NumeroMarsamisEven INT DEFAULT 0,  
-    IDJogo INT NOT NULL,  
-    PRIMARY KEY (sala, IDJogo),  
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);  
-
-CREATE TABLE marsamis (
-    marsami_id INT PRIMARY KEY,
-    IDJogo INT NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    status TINYINT,
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);
-
-CREATE TABLE localizacaoMarsami (
-    marsami_id INT NOT NULL,
-    IDJogo INT NOT NULL,
-    sala INT,
-    ultimaAtualizacao TIMESTAMP,
-    PRIMARY KEY (marsami_id, IDJogo),
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE,
-    FOREIGN KEY (marsami_id) REFERENCES marsamis(marsami_id) ON DELETE CASCADE
-);
-CREATE TABLE mensagens (
-    mensagem_id INT PRIMARY KEY,
-    IDJogo INT NOT NULL,
-    sala INT,
-    sensor INT,
-    leitura DECIMAL,
-    tipo_alerta VARCHAR(50),
-    msg VARCHAR(100),
-    hour TIMESTAMP,
-    FOREIGN KEY (IDJogo) REFERENCES jogo(IDJogo) ON DELETE CASCADE
-);
+CREATE TABLE IF NOT EXISTS ocupacaoLabirinto (  
+    sala INT NOT NULL,  
+    odd INT DEFAULT 0,  
+    even INT DEFAULT 0,  
+    jogo_id INT NOT NULL,  
+    PRIMARY KEY (sala, jogo_id),  
+    FOREIGN KEY (jogo_id) REFERENCES jogo(idJogo)  
+) ENGINE=InnoDB;  
 
 -- -----------------------------------------------------  
 -- outlier tables  
@@ -138,7 +95,7 @@ CREATE TABLE IF NOT EXISTS invalid_format_errors (
     raw_payload TEXT,  
     error_message VARCHAR(255),  
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP  
-);  
+) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS advanced_outliers_sound (  
     id INT AUTO_INCREMENT PRIMARY KEY,  
@@ -147,7 +104,7 @@ CREATE TABLE IF NOT EXISTS advanced_outliers_sound (
     hour DATETIME,  
     error_reason VARCHAR(255),  
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP  
-);  
+) ENGINE=InnoDB;  
 
 CREATE TABLE IF NOT EXISTS advanced_outliers_movements (  
     id INT AUTO_INCREMENT PRIMARY KEY,  
@@ -157,8 +114,7 @@ CREATE TABLE IF NOT EXISTS advanced_outliers_movements (
     status INT,  
     error_reason VARCHAR(255),  
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP  
-);  
-
+) ENGINE=InnoDB;  
 
 -- -----------------------------------------------------  
 -- stored procedures  
@@ -170,17 +126,17 @@ CREATE PROCEDURE sp_MigrateSound(
     IN p_player INT,  
     IN p_hour DATETIME,  
     IN p_soundLevel FLOAT,  
-    IN p_IDJogo INT  
+    IN p_jogo_id INT  
 )  
 BEGIN  
     DECLARE v_limiteRuido FLOAT;  
-    SELECT limiteRuido INTO v_limiteRuido FROM setupMaze WHERE IDJogo = p_IDJogo;  
+    SELECT limiteRuido INTO v_limiteRuido FROM setupMaze WHERE jogo_id = p_jogo_id;  
     IF p_soundLevel > v_limiteRuido THEN  
         INSERT INTO advanced_outliers_sound (player_id, sound_level, hour, error_reason)  
         VALUES (p_player, p_soundLevel, p_hour, 'exceeded noise limit');  
     ELSE  
-        INSERT INTO sound (id_sound, player, hour, soundLevel, IDJogo)  
-        VALUES (p_id, p_player, p_hour, p_soundLevel, p_IDJogo);  
+        INSERT INTO sound (id_sound, player, hour, soundLevel, jogo_id)  
+        VALUES (p_id, p_player, p_hour, p_soundLevel, p_jogo_id);  
     END IF;  
 END$$  
 
@@ -191,7 +147,7 @@ CREATE PROCEDURE sp_MigrateMovements(
     IN p_roomOrigin INT,  
     IN p_roomDestiny INT,  
     IN p_status INT,  
-    IN p_IDJogo INT  
+    IN p_jogo_id INT  
 )  
 BEGIN  
     IF p_roomOrigin = p_roomDestiny AND p_status NOT IN (0, 2) THEN  
@@ -199,24 +155,24 @@ BEGIN
         VALUES (p_marsami, p_roomOrigin, p_roomDestiny, p_status, 'invalid room transition', NOW());  
     ELSE  
         INSERT INTO medicoesPassagens  
-        VALUES (p_id, p_player, p_marsami, p_roomOrigin, p_roomDestiny, p_status, p_IDJogo);  
+        VALUES (p_id, p_player, p_marsami, p_roomOrigin, p_roomDestiny, p_status, p_jogo_id);  
     END IF;  
     IF p_status = 1 THEN  
-        CALL sp_UpdateRoomOccupancy(p_roomDestiny, p_marsami % 2, p_IDJogo);  
+        CALL sp_UpdateRoomOccupancy(p_roomDestiny, p_marsami % 2, p_jogo_id);  
     END IF;  
 END$$  
 
 CREATE PROCEDURE sp_UpdateRoomOccupancy(
     IN p_room INT,
     IN p_is_odd BOOLEAN,
-    IN p_IDJogo INT
+    IN p_jogo_id INT
 )
 BEGIN
-    INSERT INTO ocupacaoLabirinto (sala, odd, even, IDJogo)
-    VALUES (p_room, p_is_odd, (1 - p_is_odd), p_IDJogo)  -- Fixed "NOT" to arithmetic
+    INSERT INTO ocupacaoLabirinto (sala, odd, even, jogo_id)
+    VALUES (p_room, p_is_odd, (1 - p_is_odd), p_jogo_id)
     ON DUPLICATE KEY UPDATE
         odd = odd + p_is_odd,
-        even = even + (1 - p_is_odd);  -- Fixed here too
+        even = even + (1 - p_is_odd);
 END$$
 
 -- -----------------------------------------------------  
@@ -227,10 +183,10 @@ AFTER INSERT ON sound
 FOR EACH ROW  
 BEGIN  
     DECLARE v_limiteRuido FLOAT;  
-    SELECT limiteRuido INTO v_limiteRuido FROM setupMaze WHERE IDJogo = NEW.IDJogo;  
+    SELECT limiteRuido INTO v_limiteRuido FROM setupMaze WHERE jogo_id = NEW.jogo_id;  
     IF NEW.soundLevel > v_limiteRuido THEN  
-        UPDATE corridor SET status = 'closed' WHERE IDJogo = NEW.IDJogo;  
-        UPDATE jogo SET estado = 'inativo' WHERE id_jogo = NEW.IDJogo;  
+        UPDATE corridor SET status = 'closed' WHERE jogo_id = NEW.jogo_id;  
+        UPDATE jogo SET estado = 'terminado' WHERE idJogo = NEW.jogo_id;  -- Changed to idJogo
     END IF;  
 END$$  
 
@@ -244,4 +200,4 @@ BEGIN
     AND hour = NEW.hour;  
 END$$  
 
-DELIMITER ;  
+DELIMITER ;
