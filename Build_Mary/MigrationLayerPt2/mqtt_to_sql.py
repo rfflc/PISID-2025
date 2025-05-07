@@ -64,23 +64,23 @@ def on_message(client, userdata, message):
         conn = get_mysql_conn()
         with conn.cursor() as cursor:
             if payload_type == 'sound':
-                cursor.callproc("sp_MigrateSound", [
-                    f"{datetime.now().timestamp()}",
-                    payload["Player"],
-                    payload["Hour"],
-                    payload["Sound"],
-                    1  # jogo_id - verify this exists!
+                cursor.callproc("sp_MigrateSound", [  
+                    f"{datetime.now().timestamp()}",  
+                    payload["Player"],  
+                    payload["Hour"],  
+                    payload["Sound"],  
+                    1  # hardcoded jogo_id=1  
                 ])
             else:
-                cursor.callproc("sp_MigrateMovements", [
-                    f"{datetime.now().timestamp()}",
-                    payload["Player"],
-                    payload["Marsami"],
-                    payload["RoomOrigin"],
-                    payload["RoomDestiny"],
-                    payload["Status"],
-                    1  # jogo_id
-                ])
+                cursor.callproc("sp_MigrateMovements", [  
+                    f"{datetime.now().timestamp()}",  
+                    payload["Player"],  
+                    payload["Marsami"],  
+                    payload["RoomOrigin"],  
+                    payload["RoomDestiny"],  
+                    payload["Status"],  
+                    1  # hardcoded jogo_id=1  
+                ])  
             conn.commit()
         print(f"Processed {payload_type} payload")
 
