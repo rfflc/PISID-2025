@@ -1,3 +1,23 @@
+OpGuide - Guia Operacional - mongo_to_mqtt.py - Camada de Migração Pt1
+
+(PC1)
+camada que lê dados do MongoDB (coleções movements e soundLevels)
+e envia-os por MQTT para a pt2 da camada de migração
+
+Para correr:  
+
+1. verificar que tudo está instalado e online
+- mqtt
+- mosquitto
+- mongodb c/ 3 réplicas
+
+2. abrir compass e verificar que há dados para migrar
+    (i.e., que há dados nas coleções movements e/ou soundLevels
+    qur tenham o campo/flag 'migrated' a falso)
+
+3. no diretório onde está o mongo_to_mqtt.py, por consola, correr:
+    python mongo_to_mqtt.py
+
 Para testar apenas este script:
 
 1. verificar que tudo está instalado e online
