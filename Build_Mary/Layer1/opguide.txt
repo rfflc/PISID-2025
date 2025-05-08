@@ -8,23 +8,23 @@ e insere-os no mongoDB
 Para correr:
 
 1. verificar que tudo está instalado e online
-- server prof
-- mqtt
-- mongodb c/ 3 réplicas
+    - server prof
+    - mqtt
+    - mongodb c/ 3 réplicas
 
 2. no diretório onde está o layer1.py, por consola, correr:
-python layer1.py
+    python layer1.py
 
 3. no diretório onde estiver o mazerun.exe, correr:
-mazerun.exe 22 1 0 localhost 1883
-- 22 é o número do grupo
-- 1 é o modo de mensagens (ver abaixo)
-- 0 é o intervalo em segundos entre entradas
-    (0 = streaming contínuo)
-    (streaming é viável)
-- localhost é o broker
-    (atualizar quando mudarmos para 2 máquinas)
-- 1883 é o porto por definição para MQTT
+    mazerun.exe 22 1 0 localhost 1883
+    - 22 é o número do grupo
+    - 1 é o modo de mensagens (ver abaixo)
+    - 0 é o intervalo em segundos entre entradas
+        (0 = streaming contínuo)
+        (streaming é viável)
+    - localhost é o broker
+        (atualizar quando mudarmos para 2 máquinas)
+    - 1883 é o porto por definição para MQTT
 
 modos de mensagens:  
    0: sem mensagens  
