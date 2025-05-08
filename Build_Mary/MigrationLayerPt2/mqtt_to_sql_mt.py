@@ -1,4 +1,4 @@
-# mqtt_to_sql.py
+# mqtt_to_sql_mt.py
 import json
 import pymysql
 import pymysql.cursors
