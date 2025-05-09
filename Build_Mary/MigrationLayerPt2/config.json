@@ -1,4 +1,5 @@
 {  
+  "__comment": "for mqtt_to_sql.py + mqtt_to_sql_mt.py, PC2, single machine config",  
   "mongo_uri": "mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0",  
   "mongo_db": "sensordata",  
   "mqtt_broker": "localhost",  
