@@ -1,0 +1,5 @@
+#criar bases de dados
+mongod --config "C:\db_store\db1\db1.conf"
+mongod --config "C:\db_store\db2\db2.conf"
+mongod --config "C:\db_store\db3\db3.conf"
+

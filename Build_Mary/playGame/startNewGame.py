@@ -24,9 +24,9 @@ DB_PISID_CONFIG = {
     'database': os.getenv('DB_LOCAL_NAME')
 }
 
-def copiar_setupmaze(iDJogo):
+def get_setupmaze(iDJogo):
     try:
-        print("A conectar à DB para copiar mazesetup....")
+        print("A conectar à DB e obter cópia do mazesetup....")
         maze_conn = mysql.connector.connect(**DB_MAZE_CONFIG)
         pisid_conn = mysql.connector.connect(**DB_PISID_CONFIG)
 
@@ -66,11 +66,53 @@ def copiar_setupmaze(iDJogo):
             pisid_cursor.close()
             pisid_conn.close()
 
+def get_corridors(iDJogo):
+    try:
+        print("A conectar à DB e obter cópia do mazesetup....")
+        maze_conn = mysql.connector.connect(**DB_MAZE_CONFIG)
+        pisid_conn = mysql.connector.connect(**DB_PISID_CONFIG)
+
+        maze_cursor = maze_conn.cursor(dictionary=True)
+        pisid_cursor = pisid_conn.cursor()
+
+        maze_cursor.execute("SELECT * FROM corridor")
+        dados = maze_cursor.fetchall()
+        print(dados)
+        if not dados:
+            print("Nenhum dado encontrado na db maze.")
+            return
+
+        campos = ['Distance', 'Rooma', 'Roomb']
+
+        placeholders = ', '.join(['%s'] * (len(campos) + 1))  # +1 para iDJogo
+        campos_sql = ', '.join(campos + ['iDJogo'])
+
+        valores = [dados[c] for c in campos]
+        print(valores)
+        valores.append(iDJogo)
+
+        #insert_query = f"INSERT INTO setupmaze ({campos_sql}) VALUES ({placeholders})"
+        #pisid_cursor.execute(insert_query, valores)
+        #pisid_conn.commit()
+
+        print("Dados inseridos na db pisid com sucesso.")
+
+    except Error as e:
+        print(f"Erro ao copiar dados: {e}")
+    finally:
+        if maze_conn.is_connected():
+            maze_cursor.close()
+            maze_conn.close()
+        if pisid_conn.is_connected():
+            pisid_cursor.close()
+            pisid_conn.close()
+
 # FUNÇÃO PRINCIPAL
 def main():
     load_dotenv()
-    copiar_setupmaze(1)
-
+    print(DB_MAZE_CONFIG)
+    #get_setupmaze(1)
+    get_corridors(1)
 
 
 
