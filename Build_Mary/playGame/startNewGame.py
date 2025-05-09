@@ -68,13 +68,15 @@ def get_setupmaze(iDJogo):
 
 def get_corridors(iDJogo):
     try:
-        print("A conectar à DB e obter cópia do mazesetup....")
+        print("A conectar à DB e obter cópia dos corredores....")
+        #abrir a conexão com as db's (local e cloud)
         maze_conn = mysql.connector.connect(**DB_MAZE_CONFIG)
         pisid_conn = mysql.connector.connect(**DB_PISID_CONFIG)
 
         maze_cursor = maze_conn.cursor(dictionary=True)
         pisid_cursor = pisid_conn.cursor()
 
+        #Fetch todos as linhas presentes na tabela corridor do servidor cloud
         maze_cursor.execute("SELECT * FROM corridor")
         dados = maze_cursor.fetchall()
         print(dados)
@@ -82,30 +84,28 @@ def get_corridors(iDJogo):
             print("Nenhum dado encontrado na db maze.")
             return
 
-        campos = ['Distance', 'Rooma', 'Roomb']
+        # Inserir na bd local
+        for row in dados:
+            distance = row['Distance']
+            room_a = row['Rooma']
+            room_b = row['Roomb']
 
-        placeholders = ', '.join(['%s'] * (len(campos) + 1))  # +1 para iDJogo
-        campos_sql = ', '.join(campos + ['iDJogo'])
+            insert_query = """
+                           INSERT INTO corridor (Distance, salaA, salaB, iDJogo)
+                           VALUES (%s, %s, %s, %s) \
+                           """
+            pisid_cursor.execute(insert_query, (distance, room_a, room_b, iDJogo))
 
-        valores = [dados[c] for c in campos]
-        print(valores)
-        valores.append(iDJogo)
+            pisid_conn.commit()
+            print(f"{len(dados)} corredores inseridos com sucesso na base de dados local.")
 
-        #insert_query = f"INSERT INTO setupmaze ({campos_sql}) VALUES ({placeholders})"
-        #pisid_cursor.execute(insert_query, valores)
-        #pisid_conn.commit()
-
-        print("Dados inseridos na db pisid com sucesso.")
-
-    except Error as e:
-        print(f"Erro ao copiar dados: {e}")
+    except mysql.connector.Error as err:
+        print(f"Erro ao aceder às bases de dados: {err}")
     finally:
-        if maze_conn.is_connected():
-            maze_cursor.close()
-            maze_conn.close()
-        if pisid_conn.is_connected():
-            pisid_cursor.close()
-            pisid_conn.close()
+        maze_cursor.close()
+        pisid_cursor.close()
+        maze_conn.close()
+        pisid_conn.close()
 
 # FUNÇÃO PRINCIPAL
 def main():
