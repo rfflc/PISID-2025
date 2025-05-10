@@ -143,7 +143,7 @@ def get_corridors(IDJogo):
 #LOOP QUE MONITORIZA O JOGO E CORRE A LÓGICA
 last_level = 1
 
-def monitor_game(IDJogo, exe_process, mqtt_client, normalnoise, noisevartoleration):
+def monitor_game(IDJogo, groupNumber, exe_process, mqtt_client, normalnoise, noisevartoleration):
     conn = get_db_connection(DB_PISID_CONFIG)
     cursor = conn.cursor(dictionary=True)
     doors_closed = False
@@ -151,7 +151,7 @@ def monitor_game(IDJogo, exe_process, mqtt_client, normalnoise, noisevartolerati
     try:
         while exe_process.poll() is None:
             doors_closed = check_sound_and_rooms(cursor, IDJogo, mqtt_client, normalnoise, noisevartoleration, doors_closed)
-            check_room_balance_and_score(cursor, IDJogo, mqtt_client)
+            check_room_balance_and_score(cursor, groupNumber, mqtt_client)
             time.sleep(2)
     except Exception as e:
         print(f"Erro durante o jogo: {e}")
@@ -161,7 +161,7 @@ def monitor_game(IDJogo, exe_process, mqtt_client, normalnoise, noisevartolerati
         conn.close()
 
 #LOGICA DE JOGO
-def check_sound_and_rooms(cursor, IDJogo, mqtt_client, normalnoise, noisevartoleration, doors_closed):
+def check_sound_and_rooms(cursor, IDJogo, groupNumber,mqtt_client, normalnoise, noisevartoleration, doors_closed):
     global last_level
 
     cursor.execute("SELECT soundlevel FROM sound WHERE IDJogo = %s ORDER BY id DESC LIMIT 1", (IDJogo,))
@@ -195,14 +195,17 @@ def check_sound_and_rooms(cursor, IDJogo, mqtt_client, normalnoise, noisevartole
         open_doors = cursor.fetchall()
         half_to_close = random.sample(open_doors, k=len(open_doors)//2)
         for row in half_to_close:
-            cursor.execute("UPDATE corridor SET status = 'fechado' WHERE id = %s", (row['id'],))
+            message = "{Type: CloseDoor, Player:" + str(groupNumber) +  ", RoomOrigin: " + str(row['salaA']) + ", RoomDestiny: " + str(row['salaB']) + "}"
+            mqtt_publish(mqtt_client, "pisid_mazeact", message)
+            cursor.execute("UPDATE corridor SET status = 'fechado' WHERE id = %s", (row['salaA'],))
         cursor.connection.commit()
         print(f"[MQTT] Closed {len(half_to_close)} random doors (Level 2)")
         last_level = 2
         return True
 
     if level == 3 and last_level != 3:
-        mqtt_publish(mqtt_client, "pisid_mazeact", str({"Type": "CloseAllDoor", "Player": IDJogo}))
+        message = '{Type: OpenAllDoor, Player:' + str(groupNumber) + '}'
+        mqtt_publish(mqtt_client, "pisid_mazeact", message)
         cursor.execute("UPDATE corridor SET status = 'fechado' WHERE iDJogo = %s", (IDJogo,))
         cursor.connection.commit()
         last_level = 3
@@ -210,7 +213,7 @@ def check_sound_and_rooms(cursor, IDJogo, mqtt_client, normalnoise, noisevartole
 
     return doors_closed
 
-def check_room_balance_and_score(cursor, IDJogo, mqtt_client):
+def check_room_balance_and_score(cursor, groupNumber, mqtt_client):
     cursor.execute("SELECT sala, NumeroMarsamisEven, NumeroMarsamisOdd FROM ocupaçãolabirinto")
     for row in cursor.fetchall():
         room = row['sala']
@@ -218,11 +221,7 @@ def check_room_balance_and_score(cursor, IDJogo, mqtt_client):
         odd = row['NumeroMarsamisOdd']
 
         if even > 0 and even == odd:
-            message = {
-                "Type": "Score",
-                "Player": IDJogo,
-                "Room": room
-            }
+            message = '{Type: Score, Player:' + str(groupNumber) + ', Room: ' + str(room) +'}'
             mqtt_publish(mqtt_client, "pisid_mazeact", str(message))
             print(f"[MQTT] Score triggered for Room {room}")
 
@@ -255,7 +254,7 @@ def main():
         return
 
     process = start_game_executable(exe_path)
-    monitor_game(IDJogo, process, mqtt_client, normalnoise, noisevartoleration)
+    monitor_game(IDJogo, groupNumber,process, mqtt_client, normalnoise, noisevartoleration)
 
 if __name__ == "__main__":
     main()
