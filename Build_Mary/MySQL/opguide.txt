@@ -1,0 +1,75 @@
+OpGuide - Guia Operacional - schema.sql - esquema da bd SQL
+
+(PC2)
+esquema que permite um setup rápido da base de dados em SQL que
+corre no PC2
+
+1. login na shell do XAMPP como root:
+    mysql -u root -p
+    (vai pedir password, caso não haja, carregar só no Enter)
+
+A. listar todas as bds diponíveis:
+    SHOW DATABASES;
+
+B. apagar a bd do projeto, caso exista (maze):
+    DROP DATABASE IF EXISTS maze;
+
+2. criar a bd do projeto (maze):
+    CREATE DATABASE IF NOT EXISTS maze;
+
+3. mudar para a bd do projeto (maze):
+    USE maze;
+
+C. verificar se estamos na bd correta:
+    SELECT DATABASE();
+
+4. correr o schema:
+    (colem aqui o path de onde têm o schema na vossa máquina)
+    Rui:
+    SOURCE C:/Users/RCSP-2/Documents/GitHub/PISID-2025/Build_Mary/MySQL/schema_v3.sql;
+    SOURCE C:/Users/RCSP-1/Desktop/schema_v3.sql;
+
+5.1. verificar tabelas:
+    SHOW TABLES;
+    (return correto:)
+    +-----------------------------+
+    | Tables_in_maze              |
+    +-----------------------------+
+    | advanced_outliers_movements |
+    | advanced_outliers_sound     |
+    | corridor                    |
+    | jogo                        |
+    | medicoespassagens           |
+    | mensagens                   |
+    | ocupacaolabirinto           |
+    | setupmaze                   |
+    | sound                       |
+    | utilizador                  |
+    +-----------------------------+
+
+5.2. verificar triggers:
+    SHOW TRIGGERS;
+    (return correto:)
+    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+    | Trigger                        | Event  | Table | Statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Timing | Created                | sql_mode                                            | Definer        | character_set_client | collation_connection | Database Collation |
+    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+    | tr_FecharPortas_SeRuidoExceder | INSERT | sound | BEGIN
+    DECLARE limite FLOAT;
+    SELECT `limiteRuido` INTO limite FROM `setupMaze` WHERE `IDJogo` = NEW.`IDJogo`;
+    IF NEW.`soundLevel` > limite THEN
+        UPDATE `corridor` SET `status` = 'closed' WHERE `IDJogo` = NEW.`IDJogo`;
+        UPDATE `jogo` SET `estado` = 'terminado' WHERE `IDJogo` = NEW.`IDJogo`;
+        INSERT INTO `mensagens` (`IDJogo`, `tipo`, `mensagem`)
+        VALUES (NEW.`IDJogo`, 'alerta_ruido', 'Portas fechadas devido a ruido excessivo.');
+    END IF;
+    END  | AFTER  | 2025-05-12 23:18:52.50 | NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_general_ci   | utf8mb4_general_ci |
+    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+
+5.3.1. verificar stored procedures (nomes):
+    SHOW PROCEDURE STATUS WHERE Db = 'maze';
+    (return correto:)
+    Empty set
+
+5.3.2. verificar stored procedures (código):
+    (mudar o nome de acordo)
+    SHOW CREATE PROCEDURE sp_nomeSP;
