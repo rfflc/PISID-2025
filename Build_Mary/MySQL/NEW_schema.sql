@@ -43,10 +43,10 @@ CREATE TABLE `corridor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `sound` (
-  `id_sound` varchar(255) NOT NULL,
+  `IDSound` varchar(255) NOT NULL,
   `player` int(11) NOT NULL,
-  `hour` datetime NOT NULL,
-  `soundLevel` float NOT NULL,
+  `Hour` datetime NOT NULL,
+  `Sound` float NOT NULL,
   `IDJogo` int(11) NOT NULL,
   PRIMARY KEY (`id_sound`),
   UNIQUE KEY `idx_unique_sound` (`player`,`hour`),
@@ -69,10 +69,10 @@ CREATE TABLE `medicoesPassagens` (
   CONSTRAINT `medicoespassagens_ibfk_2` FOREIGN KEY (`roomOrigin`,`roomDestiny`,`IDJogo`) REFERENCES `corridor` (`salaA`,`salaB`,`IDJogo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `ocupacaoLabirinto` (
-  `sala` int(11) NOT NULL,
-  `odd` int(11) DEFAULT 0,
-  `even` int(11) DEFAULT 0,
+CREATE TABLE `ocupaçãolabirinto` (
+  `Sala` int(11) NOT NULL,
+  `NumeroMarsamisOdd` int(11) DEFAULT 0,
+  `NumeroMarsamisEven` int(11) DEFAULT 0,
   `triggersUsed` int(11) DEFAULT 0,
   `IDJogo` int(11) NOT NULL,
   PRIMARY KEY (`sala`,`IDJogo`),
@@ -108,12 +108,16 @@ CREATE TABLE `advanced_outliers_movements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `mensagens` (
-  `id_mensagem` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IDJogo` int(11) NOT NULL,
-  `tipo` enum('alerta_ruido','gatilho','erro') NOT NULL,
-  `mensagem` text,
-  `hora` timestamp DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_mensagem`),
+  `Hora` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `Sala` int(11),
+  `Sensor` int(11),
+  `Leitura` decimal NOT NULL,
+  `TipoAlerta` enum('alerta_ruido','gatilho','erro') NOT NULL,
+  `Msg` text,
+  `HoraEscrita` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
   KEY `IDJogo` (`IDJogo`),
   CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
