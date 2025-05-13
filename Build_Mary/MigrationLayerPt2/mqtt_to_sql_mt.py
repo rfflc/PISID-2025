@@ -47,9 +47,9 @@ def process_sound_message(payload, raw_payload):
         with conn.cursor() as cursor:
             cursor.execute(
                 """
-    INSERT INTO sound (id_sound, player, hour, soundLevel, IDJogo)
-    VALUES (%s, %s, %s, %s, %s)
-""",
+                INSERT INTO sound (id_sound, player, hour, soundlevel, idjogo)
+                VALUES (%s, %s, %s, %s, %s)
+                """,
                 [
                     f"{datetime.now().timestamp()}",
                     payload["Player"],
@@ -74,10 +74,10 @@ def process_movement_message(payload, raw_payload):
         with conn.cursor() as cursor:
             cursor.execute(
                 """
-    INSERT INTO medicoespassagens 
-    (id_medicao, player, marsami, roomOrigin, roomDestiny, status, IDJogo)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
-""",
+                INSERT INTO medicoespassagens 
+                (id_medicao, player, marsami, roomorigin, roomdestiny, status, idjogo)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """,
                 [
                     f"{datetime.now().timestamp()}",
                     payload["Player"],
@@ -108,7 +108,7 @@ def handle_error(e, raw_payload, payload_type):
                 cursor.execute(
                     """
                     INSERT INTO advanced_outliers_sound 
-                    (player_id, sound_level, hour, error_reason)
+                    (player_id, soundlevel, hour, errorreason)
                     VALUES (%(Player)s, %(Sound)s, %(Hour)s, %(error)s)
                     """,
                     {**payload, **error_data},
@@ -117,7 +117,7 @@ def handle_error(e, raw_payload, payload_type):
                 cursor.execute(
                     """
                     INSERT INTO advanced_outliers_movements 
-                    (marsami_id, room_origin, room_destiny, status, error_reason)
+                    (marsami_id, roomorigin, roomdestiny, status, errorreason)
                     VALUES (%(Marsami)s, %(RoomOrigin)s, %(RoomDestiny)s, %(Status)s, %(error)s)
                     """,
                     {**payload, **error_data},
