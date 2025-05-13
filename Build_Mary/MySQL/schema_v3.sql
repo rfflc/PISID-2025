@@ -27,7 +27,7 @@ CREATE TABLE `setupMaze` (
   `limiteRuido` float DEFAULT 21.5,
   PRIMARY KEY (`id_setup`),
   KEY `IDJogo` (`IDJogo`),
-  CONSTRAINT `setupmaze_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`)
+  CONSTRAINT `setupMaze_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `corridor` (
@@ -65,8 +65,8 @@ CREATE TABLE `medicoesPassagens` (
   PRIMARY KEY (`id_medicao`),
   UNIQUE KEY `idx_unique_movement` (`player`,`marsami`,`roomOrigin`,`roomDestiny`,`status`),
   KEY `IDJogo` (`IDJogo`),
-  CONSTRAINT `medicoespassagens_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`),
-  CONSTRAINT `medicoespassagens_ibfk_2` FOREIGN KEY (`roomOrigin`,`roomDestiny`,`IDJogo`) REFERENCES `corridor` (`salaA`,`salaB`,`IDJogo`)
+  CONSTRAINT `medicoesPassagens_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`),
+  CONSTRAINT `medicoesPassagens_ibfk_2` FOREIGN KEY (`roomOrigin`,`roomDestiny`,`IDJogo`) REFERENCES `corridor` (`salaA`,`salaB`,`IDJogo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `ocupacaoLabirinto` (
@@ -77,7 +77,7 @@ CREATE TABLE `ocupacaoLabirinto` (
   `IDJogo` int(11) NOT NULL,
   PRIMARY KEY (`sala`,`IDJogo`),
   KEY `IDJogo` (`IDJogo`),
-  CONSTRAINT `ocupacaolabirinto_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`)
+  CONSTRAINT `ocupacaoLabirinto_ibfk_1` FOREIGN KEY (`IDJogo`) REFERENCES `jogo` (`IDJogo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `advanced_outliers_sound` (
