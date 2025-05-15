@@ -73,3 +73,36 @@ C. verificar se estamos na bd correta:
 5.3.2. verificar stored procedures (código):
     (mudar o nome de acordo)
     SHOW CREATE PROCEDURE sp_nomeSP;
+
+6. correr o setup de utilizadores:
+    (colem aqui o path de onde têm o schema na vossa máquina)
+    Rui:
+    SOURCE C:/Users/RCSP-2/Documents/GitHub/PISID-2025/Build_Mary/MySQL/users_setup.sql;
+    SOURCE C:/Users/RCSP-1/Desktop/users_setup.sql;
+
+7. verificar utilizadores:
+    SELECT user, host FROM mysql.user;
+    (return correto:)
+    root, bot_script, layer2_script, maze_webuser
+
+8. verificar permissões:
+    SHOW GRANTS FOR 'service_script_migration'@'localhost';
+    (return correto:)
+    GRANT USAGE ON *.* TO `service_script_migration`@`localhost`
+    GRANT INSERT, UPDATE ON `maze`.`medicoespassagens` TO `service_script_migration`@`localhost`
+    GRANT INSERT, UPDATE ON `maze`.`sound` TO `service_script_migration`@`localhost`
+
+    SHOW GRANTS FOR 'service_script_cloud'@'localhost';
+    (return correto:)
+    GRANT USAGE ON *.* TO `service_script_cloud`@`localhost`
+    GRANT SELECT, UPDATE ON `maze`.`corridor` TO `service_script_cloud`@`localhost`
+    GRANT SELECT, UPDATE ON `maze`.`ocupacaolabirinto` TO `service_script_cloud`@`localhost`
+    GRANT INSERT ON `maze`.`mensagens` TO `service_script_cloud`@`localhost`
+
+
+    SHOW GRANTS FOR 'web_user'@'localhost';
+    (return correto:)
+    GRANT USAGE ON *.* TO `web_user`@`localhost`
+    GRANT SELECT ON `maze`.`jogo` TO `web_user`@`localhost`
+    GRANT SELECT ON `maze`.`ocupacaolabirinto` TO `web_user`@`localhost`
+    GRANT SELECT ON `maze`.`mensagens` TO `web_user`@`localhost`
