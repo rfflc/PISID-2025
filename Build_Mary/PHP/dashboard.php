@@ -50,7 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->close();
         $group = $_SESSION['group']; 
-        $p = popen('start "" cmd /K init_jogo.bat ' . escapeshellarg($group), 'r');
+        $task_name = "Game_" . time();
+        $command = 'schtasks /create /tn "' . $task_name . '" /tr "' . realpath('init_jogo.bat') . ' ' . escapeshellarg($group) . '" /sc once /st ' . date('H:i', strtotime('+1 minute')) . ' /f';
+        shell_exec($command);
         pclose($p);
         header("Location: dashboard.php");
         exit();
@@ -176,6 +178,21 @@ $result = $stmt->get_result();
             border-radius: 4px;
             margin: 0.5rem 0;
         }
+
+        .alerts-container {
+            margin-top: 2rem;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #1a73e8;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
@@ -272,6 +289,19 @@ $result = $stmt->get_result();
                 ?>
             </tbody>
         </table>
+
+        <h3>Alertas</h3>
+        <div class="alerts-container">
+            <?php
+            $alert_stmt = $conn->prepare("SELECT tipo, mensagem, hora FROM mensagens WHERE idjogo = ?");
+            $alert_stmt->bind_param("i", $game_id); // Assume $game_id is fetched dynamically
+            $alert_stmt->execute();
+            $alerts = $alert_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            foreach ($alerts as $alert) {
+                echo "<div class='alert'><strong>{$alert['tipo']}</strong>: {$alert['mensagem']} [{$alert['hora']}]</div>";
+            }
+            ?>
+        </div>
     </div>
 
     <script>
