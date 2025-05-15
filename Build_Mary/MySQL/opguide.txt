@@ -50,20 +50,55 @@ C. verificar se estamos na bd correta:
 5.2. verificar triggers:
     SHOW TRIGGERS;
     (return correto:)
-    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
-    | Trigger                        | Event  | Table | Statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Timing | Created                | sql_mode                                            | Definer        | character_set_client | collation_connection | Database Collation |
-    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
-    | tr_FecharPortas_SeRuidoExceder | INSERT | sound | BEGIN
-    DECLARE limite FLOAT;
-    SELECT `limiteRuido` INTO limite FROM `setupMaze` WHERE `IDJogo` = NEW.`IDJogo`;
-    IF NEW.`soundLevel` > limite THEN
-        UPDATE `corridor` SET `status` = 'closed' WHERE `IDJogo` = NEW.`IDJogo`;
-        UPDATE `jogo` SET `estado` = 'terminado' WHERE `IDJogo` = NEW.`IDJogo`;
-        INSERT INTO `mensagens` (`IDJogo`, `tipo`, `mensagem`)
-        VALUES (NEW.`IDJogo`, 'alerta_ruido', 'Portas fechadas devido a ruido excessivo.');
+    +--------------------------------+--------+-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger                        | Event  | Table | Statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Timing | Created                | sql_mode                                            | Definer        | character_set_client | collation_connection | Database Collation |
++--------------------------------+--------+-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| tr_alerta_ruido                | INSERT | sound | BEGIN
+    DECLARE last_alert_time TIMESTAMP;
+    DECLARE last_alert_type VARCHAR(20);
+    DECLARE current_alert_type VARCHAR(20);
+
+    IF NEW.soundlevel > 21 THEN
+        SET current_alert_type = 'muito elevado';
+    ELSEIF NEW.soundlevel > 20 THEN
+        SET current_alert_type = 'elevado';
+    ELSE
+        SET current_alert_type = NULL;
     END IF;
-    END  | AFTER  | 2025-05-12 23:18:52.50 | NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_general_ci   | utf8mb4_general_ci |
-    +--------------------------------+--------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+
+    IF current_alert_type IS NOT NULL THEN
+
+        SELECT tipo, hora INTO last_alert_type, last_alert_time
+        FROM mensagens
+        WHERE idjogo = NEW.idjogo AND tipo = 'alerta_ruido'
+        ORDER BY hora DESC
+        LIMIT 1;
+
+        IF (last_alert_time IS NULL)
+            OR (current_alert_type = 'muito elevado' AND last_alert_type = 'elevado')
+            OR (TIMESTAMPDIFF(SECOND, last_alert_time, NOW()) >= 1) THEN
+
+            INSERT INTO mensagens (idjogo, tipo, mensagem, hora)
+            VALUES (
+                NEW.idjogo,
+                'alerta_ruido',
+                CONCAT('N├¡vel de ru├¡do ', current_alert_type),
+                NOW()
+            );
+        END IF;
+    END IF;
+END | AFTER  | 2025-05-15 18:48:06.83 | NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_general_ci   | utf8mb4_general_ci |
+| tr_fecharportas_seruidoexceder | INSERT | sound | BEGIN
+  DECLARE limite FLOAT;
+  SELECT `limiteruido` INTO limite FROM `setupmaze` WHERE `idjogo` = NEW.`idjogo`;
+  IF NEW.`soundlevel` > limite THEN
+    UPDATE `corridor` SET `status` = 'closed' WHERE `idjogo` = NEW.`idjogo`;
+    UPDATE `jogo` SET `estado` = 'terminado' WHERE `idjogo` = NEW.`idjogo`;
+    INSERT INTO `mensagens` (`idjogo`, `tipo`, `mensagem`)
+    VALUES (NEW.`idjogo`, 'alerta_ruido', 'Portas fechadas devido a ru├¡do excessivo.');
+  END IF;
+END                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | AFTER  | 2025-05-15 18:48:06.90 | NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_general_ci   | utf8mb4_general_ci |
++--------------------------------+--------+-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------+----------------+----------------------+----------------------+--------------------+
 
 5.3.1. verificar stored procedures (nomes):
     SHOW PROCEDURE STATUS WHERE Db = 'maze';
@@ -88,21 +123,34 @@ C. verificar se estamos na bd correta:
 8. verificar permissões:
     SHOW GRANTS FOR 'service_script_migration'@'localhost';
     (return correto:)
-    GRANT USAGE ON *.* TO `service_script_migration`@`localhost`
-    GRANT INSERT, UPDATE ON `maze`.`medicoespassagens` TO `service_script_migration`@`localhost`
-    GRANT INSERT, UPDATE ON `maze`.`sound` TO `service_script_migration`@`localhost`
+    +---------------------------------------------------------------------------------------------------------------------------------+
+| Grants for service_script_migration@localhost                                                                                   |
++---------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `service_script_migration`@`localhost` IDENTIFIED BY PASSWORD '*F3F11A8259D91E6653FF18524575C1692030BDAA' |
+| GRANT INSERT, UPDATE ON `sensordata`.* TO `service_script_migration`@`localhost`                                                |
+| GRANT INSERT, UPDATE ON `maze`.`sound` TO `service_script_migration`@`localhost`                                                |
+| GRANT INSERT, UPDATE ON `maze`.`medicoespassagens` TO `service_script_migration`@`localhost`                                    |
++---------------------------------------------------------------------------------------------------------------------------------+
 
     SHOW GRANTS FOR 'service_script_cloud'@'localhost';
     (return correto:)
-    GRANT USAGE ON *.* TO `service_script_cloud`@`localhost`
-    GRANT SELECT, UPDATE ON `maze`.`corridor` TO `service_script_cloud`@`localhost`
-    GRANT SELECT, UPDATE ON `maze`.`ocupacaolabirinto` TO `service_script_cloud`@`localhost`
-    GRANT INSERT ON `maze`.`mensagens` TO `service_script_cloud`@`localhost`
+    +-----------------------------------------------------------------------------------------------------------------------------+
+| Grants for service_script_cloud@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `service_script_cloud`@`localhost` IDENTIFIED BY PASSWORD '*F3F11A8259D91E6653FF18524575C1692030BDAA' |
+| GRANT SELECT, UPDATE ON `maze`.`corridor` TO `service_script_cloud`@`localhost`                                             |
+| GRANT SELECT, UPDATE ON `maze`.`ocupacaolabirinto` TO `service_script_cloud`@`localhost`                                    |
+| GRANT INSERT ON `maze`.`mensagens` TO `service_script_cloud`@`localhost`                                                    |
++-----------------------------------------------------------------------------------------------------------------------------+
 
 
     SHOW GRANTS FOR 'web_user'@'localhost';
     (return correto:)
-    GRANT USAGE ON *.* TO `web_user`@`localhost`
-    GRANT SELECT ON `maze`.`jogo` TO `web_user`@`localhost`
-    GRANT SELECT ON `maze`.`ocupacaolabirinto` TO `web_user`@`localhost`
-    GRANT SELECT ON `maze`.`mensagens` TO `web_user`@`localhost`
+    +-----------------------------------------------------------------------------------------------------------------+
+| Grants for web_user@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `web_user`@`localhost` IDENTIFIED BY PASSWORD '*F3F11A8259D91E6653FF18524575C1692030BDAA' |
+| GRANT SELECT ON `maze`.`ocupacaolabirinto` TO `web_user`@`localhost`                                            |
+| GRANT SELECT ON `maze`.`mensagens` TO `web_user`@`localhost`                                                    |
+| GRANT SELECT ON `maze`.`jogo` TO `web_user`@`localhost`                                                         |
++-----------------------------------------------------------------------------------------------------------------+

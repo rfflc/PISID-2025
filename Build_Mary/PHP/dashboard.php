@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Update existing game
         $game_id = $_POST['game_id'];
         $description = $_POST['edit_description'];
-        $stmt = $conn->prepare("UPDATE jogo SET descricao = ? WHERE IDJogo = ? AND utilizador_id = ?");
+        $stmt = $conn->prepare("UPDATE jogo SET descricao = ? WHERE idjogo = ? AND utilizador_id = ?");
         $stmt->bind_param("sii", $description, $game_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->close();
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST['delete_game'])) {
         // Delete game
         $game_id = $_POST['game_id'];
-        $stmt = $conn->prepare("DELETE FROM jogo WHERE IDJogo = ? AND utilizador_id = ? AND estado = 'por_iniciar'");
+        $stmt = $conn->prepare("DELETE FROM jogo WHERE idjogo = ? AND utilizador_id = ? AND estado = 'por_iniciar'");
         $stmt->bind_param("ii", $game_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->close();
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST['start_game'])) {
         // Start game
         $game_id = $_POST['game_id'];
-        $stmt = $conn->prepare("UPDATE jogo SET estado = 'ativo', inicio = NOW() WHERE IDJogo = ? AND utilizador_id = ? AND estado = 'por_iniciar'");
+        $stmt = $conn->prepare("UPDATE jogo SET estado = 'ativo', inicio = NOW() WHERE idjogo = ? AND utilizador_id = ? AND estado = 'por_iniciar'");
         $stmt->bind_param("ii", $game_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->close();
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT IDJogo, descricao, inicio, fim, estado FROM jogo WHERE utilizador_id = ? ORDER BY IDJogo DESC");
+$stmt = $conn->prepare("SELECT idjogo, descricao, inicio, fim, estado FROM jogo WHERE utilizador_id = ? ORDER BY idjogo DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -259,7 +259,7 @@ $result = $stmt->get_result();
                         echo "<tr onclick='showGameDetails(" . 
                             json_encode($row) . 
                             ")'>";
-                        echo "<td>" . htmlspecialchars($row['IDJogo']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['idjogo']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['descricao']) . "</td>";
                         echo "<td>" . (is_null($row['inicio']) ? 'N/A' : htmlspecialchars($row['inicio'])) . "</td>";
                         echo "<td>" . (is_null($row['fim']) ? 'N/A' : htmlspecialchars($row['fim'])) . "</td>";
@@ -288,8 +288,8 @@ $result = $stmt->get_result();
             const actionButtons = document.getElementById('action_buttons');
             
             // Set values in the modal
-            document.getElementById('game_id').value = game.IDJogo;
-            document.getElementById('modal_game_id').textContent = game.IDJogo;
+            document.getElementById('game_id').value = game.idjogo;
+            document.getElementById('modal_game_id').textContent = game.idjogo;
             document.getElementById('edit_description').value = game.descricao;
             document.getElementById('modal_start_time').textContent = game.inicio || 'N/A';
             document.getElementById('modal_end_time').textContent = game.fim || 'N/A';
