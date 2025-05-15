@@ -26,8 +26,8 @@ C. verificar se estamos na bd correta:
 4. correr o schema:
     (colem aqui o path de onde têm o schema na vossa máquina)
     Rui:
-    SOURCE C:/Users/RCSP-2/Documents/GitHub/PISID-2025/Build_Mary/MySQL/schema_v4.sql;
-    SOURCE C:/Users/RCSP-1/Desktop/schema_v4.sql;
+    SOURCE C:/Users/RCSP-2/Documents/GitHub/PISID-2025/Build_Mary/MySQL/schema_v5.sql;
+    SOURCE C:/Users/RCSP-1/Desktop/schema_v5.sql;
 
 5.1. verificar tabelas:
     SHOW TABLES;

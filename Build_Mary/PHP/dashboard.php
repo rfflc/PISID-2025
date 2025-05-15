@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$conn = new mysqli($_SESSION['server_ip'], "root", "", "pisid", $_SESSION['server_port']);
+$conn = new mysqli($_SESSION['server_ip'], "web_user", "pisid", "pisid", $_SESSION['server_port']);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
