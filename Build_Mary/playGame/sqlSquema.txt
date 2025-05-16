@@ -24,7 +24,9 @@ CREATE TABLE `jogo` (
 CREATE TABLE `setupmaze` (
   `id_setup` int(11) NOT NULL AUTO_INCREMENT,
   `idjogo` int(11) NOT NULL,
-  `limiteruido` float DEFAULT 21.5,
+  `normalnoise` DECIMAL(10,2) DEFAULT 19.2,
+  `frozentime` int(11) NOT NULL,
+  `noisevartoleration` DECIMAL(10,2) DEFAULT 2,	
   PRIMARY KEY (`id_setup`),
   KEY `idjogo` (`idjogo`),
   CONSTRAINT `setupmaze_ibfk_1` FOREIGN KEY (`idjogo`) REFERENCES `jogo` (`idjogo`)
