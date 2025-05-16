@@ -68,12 +68,10 @@ def get_setupmaze(IDJogo):
             print("Nenhum dado encontrado na db maze.")
             return None, None
 
-        campos = ['normalnoise', 'numberrooms', 'numberplayers', 'frozentime',
-                  'delaytime', 'timemarsamilive', 'noisevartoleration', 'step',
-                  'minutesstep', 'minutessilence', 'randomsound', 'randommove']
+        campos = ['normalnoise','frozentime','noisevartoleration']
 
         placeholders = ', '.join(['%s'] * (len(campos) + 1))
-        campos_sql = ', '.join(campos + ['IDJogo'])
+        campos_sql = ', '.join(campos + ['idjogo'])
 
         valores = [dados[c] for c in campos]
         valores.append(IDJogo)
@@ -113,18 +111,17 @@ def get_corridors(IDJogo):
             return
 
         insert_query = """
-            INSERT INTO corridor (id_corredor, Distance, salaA, salaB, iDJogo, status)
+            INSERT INTO corridor (id_corredor, Distance, salaA, salaB, idjogo, status)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
 
         for row in dados:
             pisid_cursor.execute(insert_query, (
                 row['ID'],
-                row['Distance'],
                 row['Rooma'],
                 row['Roomb'],
-                IDJogo,
-                'aberto'
+                'aberto',
+                IDJogo
             ))
 
         pisid_conn.commit()
@@ -164,13 +161,14 @@ def monitor_game(IDJogo, groupNumber, exe_process, mqtt_client, normalnoise, noi
 def check_sound_and_rooms(cursor, IDJogo, groupNumber,mqtt_client, normalnoise, noisevartoleration, doors_closed):
     global last_level
 
-    cursor.execute("SELECT soundlevel FROM sound WHERE IDJogo = %s ORDER BY id DESC LIMIT 1", (IDJogo,))
+    cursor.execute("SELECT soundlevel FROM sound WHERE idjogo = %s ORDER BY id_sound DESC LIMIT 1", (IDJogo,))
     sound = cursor.fetchone()
 
     if not sound:
         return doors_closed
 
     current = sound['soundlevel']
+    hour = sound['hour']
     level_1_max = normalnoise + (1/3 * noisevartoleration)
     level_2_max = normalnoise + (2/3 * noisevartoleration)
 
@@ -185,49 +183,84 @@ def check_sound_and_rooms(cursor, IDJogo, groupNumber,mqtt_client, normalnoise, 
 
     if level == 1 and last_level != 1:
         mqtt_publish(mqtt_client, "pisid_mazeact", str({"Type": "OpenAllDoor", "Player": IDJogo}))
-        cursor.execute("UPDATE corridor SET status = 'aberto' WHERE iDJogo = %s", (IDJogo,))
+        cursor.execute("UPDATE corridor SET status = 'open' WHERE idjogo = %s", (IDJogo,))
         cursor.connection.commit()
         last_level = 1
         return False
 
     if level == 2 and last_level != 2:
-        cursor.execute("SELECT id FROM corridor WHERE iDJogo = %s AND status = 'aberto'", (IDJogo,))
+        inserir_mensagem(cursor, IDJogo, current, "alerta_ruido", mensagem="Nível de som elevado", hora=hour)
+        cursor.execute("SELECT id FROM corridor WHERE idjogo = %s AND status = 'aberto'", (IDJogo,))
         open_doors = cursor.fetchall()
         half_to_close = random.sample(open_doors, k=len(open_doors)//2)
         for row in half_to_close:
-            message = "{Type: CloseDoor, Player:" + str(groupNumber) +  ", RoomOrigin: " + str(row['salaA']) + ", RoomDestiny: " + str(row['salaB']) + "}"
+            message = "{Type: CloseDoor, Player:" + str(groupNumber) +  ", RoomOrigin: " + str(row['salaa']) + ", RoomDestiny: " + str(row['salab']) + "}"
             mqtt_publish(mqtt_client, "pisid_mazeact", message)
-            cursor.execute("UPDATE corridor SET status = 'fechado' WHERE id = %s", (row['salaA'],))
+            cursor.execute("UPDATE corridor SET status = 'closed' WHERE id_corredor = %s", (row['id_corredor'],))
         cursor.connection.commit()
         print(f"[MQTT] Closed {len(half_to_close)} random doors (Level 2)")
         last_level = 2
         return True
 
     if level == 3 and last_level != 3:
-        message = '{Type: OpenAllDoor, Player:' + str(groupNumber) + '}'
+        message = '{Type: CloseAllDoor, Player:' + str(groupNumber) + '}'
         mqtt_publish(mqtt_client, "pisid_mazeact", message)
-        cursor.execute("UPDATE corridor SET status = 'fechado' WHERE iDJogo = %s", (IDJogo,))
+        cursor.execute("UPDATE corridor SET status = 'closed' WHERE idjogo = %s", (IDJogo,))
         cursor.connection.commit()
         last_level = 3
+        print(f"Sound level too high at {current}")
+        inserir_mensagem(cursor, IDJogo, current, "alerta_ruido", mensagem="Nível de som muito elevado", hora=hour)
+        time.sleep(15)
+        message = '{Type: OpenAllDoor, Player:' + str(groupNumber) + '}'
+        cursor.execute("UPDATE corridor SET status = 'open' WHERE idjogo = %s", (IDJogo,))
+        cursor.connection.commit()
         return True
 
     return doors_closed
 
-def check_room_balance_and_score(cursor, groupNumber, mqtt_client):
-    cursor.execute("SELECT sala, NumeroMarsamisEven, NumeroMarsamisOdd FROM ocupaçãolabirinto")
+def check_room_balance_and_score(cursor, IDJogo, groupNumber, mqtt_client):
+    cursor.execute("SELECT sala, even, odd FROM ocupacaolabirinto")
     for row in cursor.fetchall():
         room = row['sala']
-        even = row['NumeroMarsamisEven']
-        odd = row['NumeroMarsamisOdd']
+        even = row['even']
+        odd = row['odd']
 
         if even > 0 and even == odd:
             message = '{Type: Score, Player:' + str(groupNumber) + ', Room: ' + str(room) +'}'
             mqtt_publish(mqtt_client, "pisid_mazeact", str(message))
+            str = f"Gatilho accionado na sala {room}"
+            inserir_mensagem(cursor, IDJogo, 0, "gatilho", mensagem=str,sala=room, hora=hour)
             print(f"[MQTT] Score triggered for Room {room}")
+
+def inserir_mensagem(cursor, idjogo, leitura, tipo, mensagem, sala=None, sensor=None, hora=None):
+    if tipo not in {'alerta_ruido', 'gatilho', 'erro'}:
+        raise ValueError("Tipo inválido de mensagem.")
+
+    sala = 0 if sala is None else sala
+    sensor = 0 if sensor is None else sensor
+
+    if hora:
+        cursor.execute(
+            """
+            INSERT INTO mensagens (idjogo, leitura, sala, sensor, tipo, mensagem, hora)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """,
+            (idjogo, leitura, sala, sensor, tipo, mensagem, hora)
+        )
+    else:
+        cursor.execute(
+            """
+            INSERT INTO mensagens (idjogo, leitura, sala, sensor, tipo, mensagem)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            """,
+            (idjogo, leitura, sala, sensor, tipo, mensagem)
+        )
+    cursor.connection.commit()
+
 
 def mark_game_as_terminated(conn, IDJogo):
     cursor = conn.cursor()
-    cursor.execute("UPDATE jogo SET estado = 'Terminado' WHERE IDJogo = %s", (IDJogo,))
+    cursor.execute("UPDATE jogo SET estado = 'terminado' WHERE idjogo = %s", (IDJogo,))
     conn.commit()
     cursor.close()
     print("Jogo marcado como terminado.")
