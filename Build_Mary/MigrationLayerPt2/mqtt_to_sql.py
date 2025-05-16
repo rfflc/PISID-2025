@@ -41,8 +41,8 @@ def safe_json_parse(raw):
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected with code {reason_code}")
-    client.subscribe("pisid_mazesound_22")
-    client.subscribe("pisid_mazemov_22")
+    client.subscribe("pisid_mazesound_PC2")
+    client.subscribe("pisid_mazemov_PC2")
 
 
 def on_message(client, userdata, message):
