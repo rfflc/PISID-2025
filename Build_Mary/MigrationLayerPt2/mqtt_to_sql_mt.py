@@ -132,7 +132,7 @@ def handle_error(e, raw_payload, payload_type):
 
 def sound_worker():
     client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-    client.on_connect = lambda c, *args: c.subscribe("pisid_mazesound_22")
+    client.on_connect = lambda c, *args: c.subscribe("pisid_mazesound_PC2")
 
     def on_message(client, userdata, message):
         raw = message.payload.decode()
@@ -151,7 +151,7 @@ def sound_worker():
 
 def movement_worker():
     client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-    client.on_connect = lambda c, *args: c.subscribe("pisid_mazemov_22")
+    client.on_connect = lambda c, *args: c.subscribe("pisid_mazemov_PC2")
 
     def on_message(client, userdata, message):
         raw = message.payload.decode()
