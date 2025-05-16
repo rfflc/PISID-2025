@@ -108,13 +108,14 @@
         </form>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST["username"] ?? '';
-            $group = $_POST["group"] ?? '';
+            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $group = filter_input(INPUT_POST, 'group', FILTER_VALIDATE_INT);
+            if ($group === false) die("Invalid group!");
             $server_ip = $_POST["server_ip"] ?? '';
             $server_port = $_POST["server_port"] ?? '';
 
             try {
-                $conn = new mysqli($server_ip, "root", "", "pisid", $server_port);
+                $conn = new mysqli($server_ip, "web_user", "", "pisid", $server_port);
                 
                 if ($conn->connect_error) {
                     throw new Exception("Conexão falhou com o erro: " . $conn->connect_error);

@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['description'])) {
         // Create new game
-        $description = $_POST['description'];
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         $user_id = $_SESSION['user_id'];
         $stmt = $conn->prepare("INSERT INTO jogo (utilizador_id, descricao, estado) VALUES (?, ?, 'por_iniciar')");
         $stmt->bind_param("is", $user_id, $description);
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST['update_game'])) {
         // Update existing game
         $game_id = $_POST['game_id'];
-        $description = $_POST['edit_description'];
+        $description = filter_input(INPUT_POST, 'edit_description', FILTER_SANITIZE_STRING);
         $stmt = $conn->prepare("UPDATE jogo SET descricao = ? WHERE idjogo = ? AND utilizador_id = ?");
         $stmt->bind_param("sii", $description, $game_id, $_SESSION['user_id']);
         $stmt->execute();
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $task_name = "Game_" . time();
         $command = 'schtasks /create /tn "' . $task_name . '" /tr "' . realpath('init_jogo.bat') . ' ' . escapeshellarg($group) . '" /sc once /st ' . date('H:i', strtotime('+1 minute')) . ' /f';
         shell_exec($command);
-        pclose($p);
+        // pclose($p); ???
         header("Location: dashboard.php");
         exit();
     }
@@ -293,12 +293,15 @@ $result = $stmt->get_result();
         <h3>Alertas</h3>
         <div class="alerts-container">
             <?php
-            $alert_stmt = $conn->prepare("SELECT tipo, mensagem, hora FROM mensagens WHERE idjogo = ?");
-            $alert_stmt->bind_param("i", $game_id); // Assume $game_id is fetched dynamically
-            $alert_stmt->execute();
-            $alerts = $alert_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            foreach ($alerts as $alert) {
-                echo "<div class='alert'><strong>{$alert['tipo']}</strong>: {$alert['mensagem']} [{$alert['hora']}]</div>";
+            if (isset($_POST['game_id'])) {
+                $selected_game_id = $_POST['game_id'];
+                $alert_stmt = $conn->prepare("SELECT tipo, mensagem, hora FROM mensagens WHERE idjogo = ?");
+                $alert_stmt->bind_param("i", $selected_game_id);
+                $alert_stmt->execute();
+                $alerts = $alert_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                foreach ($alerts as $alert) {
+                    echo "<div class='alert'><strong>{$alert['tipo']}</strong>: {$alert['mensagem']} [{$alert['hora']}]</div>";
+                }
             }
             ?>
         </div>
