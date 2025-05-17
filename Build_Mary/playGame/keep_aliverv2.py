@@ -8,6 +8,37 @@ import paho.mqtt.client as mqtt
 import psutil  # pip install psutil
 
 
+#####################codigolayer2###################
+main
+self.last_sound_time = time.time()
+self.last_movement_time = time.time()
+self.game_ended = False
+self.start_inactivity_monitor()
+
+def start_inactivity_monitor(self):
+    def monitor():
+        while True:
+            time.sleep(1)
+            now = time.time()
+            no_sound = now - self.last_sound_time > 10
+            no_movement = now - self.last_movement_time > 10
+
+            if not self.game_ended and no_sound and no_movement:
+                print("[INFO] Inatividade total detectada. A enviar fim de jogo...")
+                self.client.publish("pisid_mazeact", json.dumps({"Type": "End", "Player": 22}))
+                self.game_ended = True
+
+    thread = threading.Thread(target=monitor, daemon=True)
+    thread.start()
+
+#adionar ao on message:
+if "Sound" in data:
+    self.last_sound_time = time.time()
+if "Marsami" in data:
+    self.last_movement_time = time.time()
+
+
+
 def fechar_aba_terminal_mac():
     if platform.system() == "Darwin":
         subprocess.Popen([
