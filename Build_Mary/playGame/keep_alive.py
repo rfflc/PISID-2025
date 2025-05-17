@@ -4,6 +4,7 @@ import os
 import json
 import signal
 import paho.mqtt.client as mqtt
+import platform
 
 #Configurações
 TOPICO_MQTT = "pisid_keeplive_22"
@@ -16,10 +17,25 @@ ultimo_grupo = None  # grupo ativo
 
 def iniciar_script(nome, grupo):
     print(f"[INFO] Iniciando {nome}.py com grupo {grupo}")
-    return subprocess.Popen(
-        ["python", f"{nome}.py", str(grupo)],
-        creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == "nt" else 0
-    )
+    script_path = os.path.abspath(f"{nome}.py")
+    sistema = platform.system()
+
+    if sistema == "Windows":
+        # Windows: abre nova janela cmd
+        return subprocess.Popen(
+            ['cmd', '/c', 'start', 'cmd', '/k', f'python {script_path} {grupo}']
+        )
+
+    elif sistema == "Darwin":
+        # macOS: usa Terminal.app com AppleScript
+        return subprocess.Popen([
+            "osascript", "-e",
+            f'tell application "Terminal" to do script "python3 \\"{script_path}\\" {grupo}"'
+        ])
+
+    else:
+        # Linux ou outro sistema: corre em background
+        return subprocess.Popen(['python3', script_path, str(grupo)])
 
 def terminar_processos():
     global processos
