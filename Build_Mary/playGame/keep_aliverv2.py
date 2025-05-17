@@ -8,19 +8,12 @@ import paho.mqtt.client as mqtt
 import psutil  # pip install psutil
 
 
-import os
-import atexit
-
-LOCK_FILE = "layer1.lock"
-
-# Escreve o PID no ficheiro
-with open(LOCK_FILE, "w") as f:
-    f.write(str(os.getpid()))
-
-@atexit.register
-def cleanup():
-    if os.path.exists(LOCK_FILE):
-        os.remove(LOCK_FILE)
+def fechar_aba_terminal_mac():
+    if platform.system() == "Darwin":
+        subprocess.Popen([
+            "osascript", "-e",
+            'tell application "System Events" to keystroke "w" using {command down}'
+        ])
 # Configurações MQTT
 TOPICO_MQTT = "pisid_keepalive_22"
 BROKER = "broker.emqx.io"
