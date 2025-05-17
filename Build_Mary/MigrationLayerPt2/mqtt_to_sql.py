@@ -23,8 +23,8 @@ def get_mysql_conn():
     return pymysql.connect(
         host="localhost",
         user="root",
-        password="pisid",
-        database="maze",
+        password="",
+        database="pisid",
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -47,6 +47,7 @@ def on_connect(client, userdata, flags, reason_code, properties):
 
 def on_message(client, userdata, message):
     raw_payload = message.payload.decode()
+    print(f"Raw payload: {raw_payload}")
     conn = None
     try:
         # JSON parsing and validation logic
@@ -102,7 +103,17 @@ def on_message(client, userdata, message):
                         1,  # hardcoded jogo_id=1
                     ],
                 )
-            conn.commit()
+                # call stored procedure to update room occupancy
+                cursor.callproc(
+                    "sp_UpdateRoomOccupancy",
+                    (
+                        1,
+                        payload["Marsami"],
+                        payload["RoomOrigin"],
+                        payload["RoomDestiny"],
+                    ),
+                )
+                conn.commit()
         print(f"Processed {payload_type} payload")
 
     except Exception as e:

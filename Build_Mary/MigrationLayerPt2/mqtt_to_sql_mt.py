@@ -25,8 +25,8 @@ def get_mysql_conn():
     return pymysql.connect(
         host="localhost",
         user="root",
-        password="pisid",
-        database="maze",
+        password="",
+        database="pisid",
         cursorclass=pymysql.cursors.DictCursor,
     )
 
