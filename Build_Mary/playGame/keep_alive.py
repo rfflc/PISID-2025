@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import platform
 
 #Configurações
-TOPICO_MQTT = "pisid_keeplive_22"
+TOPICO_MQTT = "pisid_keepalive_22"
 BROKER = "broker.emqx.io"
 PORT = 1883
 
@@ -27,7 +27,7 @@ def iniciar_script(nome, grupo):
         )
 
     elif sistema == "Darwin":
-        
+
         return subprocess.Popen([
             "osascript", "-e",
             f'tell application "Terminal" to do script "cd \\"{script_dir}\\" && python3 \\"{nome}.py\\" {grupo}"'
