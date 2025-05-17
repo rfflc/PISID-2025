@@ -17,6 +17,7 @@ Para correr:
 
 3. no diretório onde estiver o mazerun.exe, correr:
     mazerun.exe 22 1 0 localhost 1883
+    mazerun.exe 22 1 0 broker.emqx.io 1883
     - 22 é o número do grupo
     - 1 é o modo de mensagens (ver abaixo)
     - 0 é o intervalo em segundos entre entradas
