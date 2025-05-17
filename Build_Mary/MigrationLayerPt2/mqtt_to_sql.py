@@ -122,8 +122,9 @@ def on_message(client, userdata, message):
             conn = get_mysql_conn()
             with conn.cursor() as cursor:
                 error_data = {"raw_payload": raw_payload, "error": str(e)}
-
-                if "Sound" in raw_payload:
+                if "sound" in raw_payload.lower():
+                # if "Sound" in raw_payload:
+                    print(f"DEBUG - Raw Payload (Type: {type(raw_payload)}): {raw_payload}")
                     cursor.execute(
                         """
                         INSERT INTO advanced_outliers_sound 

@@ -28,7 +28,8 @@ def get_mongo_collections():
 def publish_to_mqtt(client, topic_suffix, payload):  
     player_id = payload["Player"]  
     topic = f"pisid_maze{topic_suffix}_PC2"  
-    client.publish(topic, str(payload))  
+    # client.publish(topic, str(payload))
+    client.publish(topic, json.dumps(payload))  
     print(f"Published to {topic}: {payload}")  
 
 # main migration logic
