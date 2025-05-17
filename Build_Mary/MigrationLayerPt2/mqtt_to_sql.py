@@ -100,14 +100,14 @@ def on_message(client, userdata, message):
                         payload["RoomOrigin"],
                         payload["RoomDestiny"],
                         payload["Status"],
-                        1,  # hardcoded jogo_id=1
+                        2,  # hardcoded jogo_id=1
                     ],
                 )
                 # call stored procedure to update room occupancy
                 cursor.callproc(
                     "sp_UpdateRoomOccupancy",
                     (
-                        1,
+                        2,
                         payload["Marsami"],
                         payload["RoomOrigin"],
                         payload["RoomDestiny"],
