@@ -18,24 +18,24 @@ ultimo_grupo = None  # grupo ativo
 def iniciar_script(nome, grupo):
     print(f"[INFO] Iniciando {nome}.py com grupo {grupo}")
     script_path = os.path.abspath(f"{nome}.py")
+    script_dir = os.path.dirname(script_path)
     sistema = platform.system()
 
     if sistema == "Windows":
-        # Windows: abre nova janela cmd
         return subprocess.Popen(
-            ['cmd', '/c', 'start', 'cmd', '/k', f'python {script_path} {grupo}']
+            ['cmd', '/c', 'start', 'cmd', '/k', f'cd /d {script_dir} && python {nome}.py {grupo}']
         )
 
     elif sistema == "Darwin":
-        # macOS: usa Terminal.app com AppleScript
+        
         return subprocess.Popen([
             "osascript", "-e",
-            f'tell application "Terminal" to do script "python3 \\"{script_path}\\" {grupo}"'
+            f'tell application "Terminal" to do script "cd \\"{script_dir}\\" && python3 \\"{nome}.py\\" {grupo}"'
         ])
 
     else:
-        # Linux ou outro sistema: corre em background
         return subprocess.Popen(['python3', script_path, str(grupo)])
+
 
 def terminar_processos():
     global processos
