@@ -1,0 +1,7 @@
+{  
+  "__comment": "for layer1.py, PC1, single machine config",  
+  "mqtt_broker": "broker.emqx.io",  
+  "mqtt_port": 1883,  
+  "mongodb_uri": "mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=sensordata",  
+  "mongodb_db": "sensordata"  
+}  
