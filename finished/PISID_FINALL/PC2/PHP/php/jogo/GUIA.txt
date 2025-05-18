@@ -1,0 +1,2 @@
+Por todos os ficheiro desta pasta no caminho C:\xampp\htdocs\jogo
+deve se adicionar o mazerun.exe e os ficheiros das bibliotecas de python que estão no moodle

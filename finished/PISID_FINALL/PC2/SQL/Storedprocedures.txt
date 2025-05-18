@@ -1,0 +1,36 @@
+Storedprocedures
+
+DELIMITER //
+
+CREATE PROCEDURE sp_UpdateRoomOccupancy (
+    IN idjogo INT,
+    IN marsamiNumber INT,
+    IN salaOrigem INT,
+    IN salaDestino INT
+)
+BEGIN
+    DECLARE is_even BOOLEAN;
+    SET is_even = MOD(marsamiNumber, 2) = 0;
+
+    IF is_even THEN
+        UPDATE ocupacaolabirinto
+        SET even = GREATEST(even - 1, 0)
+        WHERE sala = salaOrigem AND idjogo = idjogo;
+
+        UPDATE ocupacaolabirinto
+        SET even = even + 1
+        WHERE sala = salaDestino AND idjogo = idjogo;
+    ELSE
+        UPDATE ocupacaolabirinto
+        SET odd = GREATEST(odd - 1, 0)
+        WHERE sala = salaOrigem;
+
+        UPDATE ocupacaolabirinto
+        SET odd = odd + 1
+        WHERE sala = salaDestino AND idjogo = idjogo;
+    END IF;
+END //
+
+DELIMITER ;
+
+

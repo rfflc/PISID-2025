@@ -1,0 +1,63 @@
+Contas DB
+
+
+#CRIAR CONTA
+##############maze_webuser##################################
+
+CREATE USER 'maze_webuser'@'%' IDENTIFIED BY 'WebPass2025!';
+
+GRANT SELECT ON pisid.utilizador TO 'maze_webuser'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON pisid.jogo TO 'maze_webuser'@'%';
+
+FLUSH PRIVILEGES;
+
+
+
+############maze_mobile#####################################
+
+CREATE USER 'maze_mobile'@'%' IDENTIFIED BY 'MobileApp2025!';
+
+GRANT SELECT ON pisid.utilizador TO 'maze_mobile'@'%';
+GRANT SELECT ON pisid.jogo TO 'maze_mobile'@'%';
+GRANT SELECT ON pisid.mensagens TO 'maze_mobile'@'%';
+GRANT SELECT ON pisid.ocupacaoLabirinto TO 'maze_mobile'@'%';
+GRANT SELECT ON pisid.sound TO 'maze_mobile'@'%';
+GRANT SELECT ON pisid.setupmaze TO 'maze_mobile'@'%';
+
+FLUSH PRIVILEGES;
+
+##########layer2_script##################################################
+
+CREATE USER 'layer2_script'@'localhost' IDENTIFIED BY 'StrongPassword123';
+
+GRANT SELECT ON pisid.jogo TO 'layer2_script'@'localhost';
+GRANT SELECT, INSERT ON pisid.medicoespassagens TO 'layer2_script'@'localhost';
+GRANT SELECT, INSERT ON pisid.sound TO 'layer2_script'@'localhost';
+GRANT SELECT, INSERT ON pisid.advanced_outliers_movements TO 'layer2_script'@'localhost';
+GRANT SELECT, INSERT ON pisid.advanced_outliers_sound TO 'layer2_script'@'localhost';
+
+#PERMISSÕES STOREDPROCEDURES
+GRANT EXECUTE ON PROCEDURE pisid.sp_UpdateRoomOccupancy TO 'layer2_script'@'localhost';
+
+FLUSH PRIVILEGES;
+
+###########bot_script###################################################################
+
+CREATE USER 'bot_script'@'localhost' IDENTIFIED BY 'SimPass2025!';
+
+GRANT SELECT, INSERT ON pisid.setupmaze TO 'bot_script'@'localhost';
+GRANT SELECT, INSERT ON pisid.corridor TO 'bot_script'@'localhost';
+GRANT INSERT ON pisid.mensagens TO 'bot_script'@'localhost';
+GRANT SELECT ON pisid.sound TO 'bot_script'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON pisid.ocupacaolabirinto TO 'bot_script'@'localhost';
+GRANT SELECT, UPDATE ON pisid.jogo TO 'bot_script'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+##############################root##################################
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;

@@ -1,0 +1,14 @@
+######SOBRE CONTAS DB#############
+ver contas associadas à DB -> SELECT user, host FROM mysql.user;
+
+Criar Utilizador -> CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+
+Dar permissões para aceder à tabela rede externa -> username'@'%'
+
+Dar permissões para aceder à tabela só apartir do localhost -> username'@'localhost'
+
+Atribuir permissões sobre tabelas ao user -> GRANT SELECT, INSERT, UPDATE, DELETE ON db.table TO 'username'@'%';
+
+Remover permissões ->DROP USER 'username'@'%';
+
+
