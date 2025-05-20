@@ -57,7 +57,7 @@ def publish_to_mqtt(client, topic_suffix, payload):
 
 # main migration logic
 def migrate():  
-    mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)  
+    mqtt_client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2, clean_session=False)  
     mqtt_client.connect(config["mqtt_broker"], config["mqtt_port"])  
     collections = get_mongo_collections()  
 

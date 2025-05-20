@@ -165,7 +165,7 @@ if __name__ == "__main__":
     ID_JOGO = args.idjogo
     print(f"[INFO] Script iniciado com IDJogo: {ID_JOGO}")
 
-    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2, clean_session=False)
     client.on_connect = on_connect
     client.on_message = on_message
 
