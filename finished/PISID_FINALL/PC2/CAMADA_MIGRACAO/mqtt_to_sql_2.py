@@ -91,7 +91,7 @@ def on_message(client, userdata, message):
                         payload["Player"],
                         payload["Hour"],
                         payload["Sound"],
-                        ID_JOGO,
+                        2,  # hardcoded jogo_id=1
                     ],
                 )
             else:
@@ -108,14 +108,14 @@ def on_message(client, userdata, message):
                         payload["RoomOrigin"],
                         payload["RoomDestiny"],
                         payload["Status"],
-                        ID_JOGO,
+                        2,  # hardcoded jogo_id=1
                     ],
                 )
                 # call stored procedure to update room occupancy
                 cursor.callproc(
                     "sp_UpdateRoomOccupancy",
                     (
-                        ID_JOGO,
+                        2,
                         payload["Marsami"],
                         payload["RoomOrigin"],
                         payload["RoomDestiny"],
