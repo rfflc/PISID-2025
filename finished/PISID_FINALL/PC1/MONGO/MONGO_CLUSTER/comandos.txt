@@ -1,0 +1,37 @@
+####criar pastas para bd's#####
+mkdir -p ~/mongo_cluster/rs1 ~/mongo_cluster/rs2 ~/mongo_cluster/rs3
+
+####iniciar cada bd######
+mongod --replSet sensordata --port 27017 --dbpath ~/mongo_cluster/rs1 --bind_ip localhost --fork --logpath ~/mongo_cluster/rs1/mongod.log
+mongod --replSet sensordata --port 27018 --dbpath ~/mongo_cluster/rs2 --bind_ip localhost --fork --logpath ~/mongo_cluster/rs2/mongod.log
+mongod --replSet sensordata --port 27019 --dbpath ~/mongo_cluster/rs3 --bind_ip localhost --fork --logpath ~/mongo_cluster/rs3/mongod.log
+
+
+####Inicializar o replica set#####
+mongosh --port 27017
+
+rs.initiate({
+  _id: "sensordata",
+  members: [
+    { _id: 0, host: "localhost:27017" },
+    { _id: 1, host: "localhost:27018" },
+    { _id: 2, host: "localhost:27019" }
+  ]
+})
+
+rs.status()
+
+####criar coleções##########
+use sensordata
+db.soundLevels.insertOne({ test: true })
+db.movements.insertOne({ test: true })
+db.invalid_format.insertOne({ test: true })
+
+
+
+####confirmar que está a funcionar
+mongosh --port 27018
+use sensordata
+db.soundLevels.find()
+
+

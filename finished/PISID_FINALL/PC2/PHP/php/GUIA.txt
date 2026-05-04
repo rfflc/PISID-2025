@@ -1,0 +1,3 @@
+Colocar a pasta php no caminho C:\xampp\htdocs\scripts\
+Colocar a pasta jogo no caminho C:\xampp\htdocs\
+ps: para a pasta jogo deve se também adicionar o mazerun.exe e a pasta internal com todos os executáveis necessário ao python

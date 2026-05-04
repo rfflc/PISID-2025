@@ -1,0 +1,55 @@
+Lista de nomes alterados para letra minúscula:
+
+
+Tabelas
+
+nome original			novo nome
+
+medicoesPassagens		medicoespassagens
+
+ocupacaoLabirinto		ocupacaolabirinto
+
+setupMaze			setupmaze
+
+advanced_outliers_sound		advanced_outliers_sound
+
+advanced_outliers_movements	advanced_outliers_movements
+
+utilizador			utilizador
+
+jogo				jogo
+
+corridor			corridor
+
+sound				sound
+
+mensagens			mensagens
+
+
+Colunas
+
+nome original		novo nome		tabelas afetadas
+
+IDJogo			idjogo			(todas com FKs)
+
+soundLevel		soundlevel		sound,
+						advanced_outliers_sound
+
+roomOrigin		roomorigin		medicoespassagens, 							advanced_outliers_movements
+
+roomDestiny		roomdestiny		medicoespassagens, 							advanced_outliers_movements
+
+errorReason		errorreason		advanced_outliers_sound, 						advanced_outliers_movements
+
+limiteRuido		limiteruido		setupmaze
+
+triggersUsed		triggersused		ocupacaolabirinto
+
+salaA/salaB		salaa/salab		corridor
+
+
+Triggers
+
+nome original				novo nome
+
+tr_FecharPortas_SeRuidoExceder		tr_fecharportas_seruidoexceder

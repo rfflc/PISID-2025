@@ -1,0 +1,37 @@
+OpGuide - Guia Operacional - mqtt_to_sql.py // mqtt_to_sql_mt.py- Camada de Migração Pt2  
+
+(PC2)  
+camada que recebe dados enviados pela pt1 através do MQTT,
+faz a deteção de erros avançados e insere os dados no SQL  
+
+Para correr:  
+
+1. verificar que tudo está instalado e online
+    - mqtt 
+    - mysql (utilizador: root, senha: pisid, database: maze)
+    - mosquitto  
+
+2. no diretório onde está o mqtt_to_sql.py, por consola, correr:  
+    python mqtt_to_sql.py  
+
+Para testar apenas este script:  
+
+1. no diretório onde está o mqtt_to_sql.py, por consola, correr:  
+    python mqtt_to_sql.py  
+
+2. abrir janela de CMD e usar o comando:  
+    mosquitto_sub -v -h localhost -t "pisid_mazesound_22" -t "pisid_mazemov_22" 
+
+Depois de testar (para dar reset aos dados de teste):  
+
+3. abrir shell do xampp e usar os comandos:
+    mysql -u root -p
+    USE maze;
+    TRUNCATE TABLE sound;  
+    TRUNCATE TABLE medicoesPassagens;  
+    TRUNCATE TABLE advanced_outliers_sound;  
+    TRUNCATE TABLE advanced_outliers_movements;  
+
+4. para confirmar, verificar tabelas vazias:  
+    SELECT * FROM sound LIMIT 1;  
+    SELECT * FROM medicoesPassagens LIMIT 1; 

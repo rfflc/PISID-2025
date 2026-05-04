@@ -1,0 +1,6 @@
+{
+    "mysql_host": "localhost",
+    "mysql_user": "service_script_cloud",
+    "mysql_password": "secure_password_here",
+    "mysql_db": "maze"
+}
